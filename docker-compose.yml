@@ -1,0 +1,20 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    image: dev_app
+    container_name: dev_app
+    ports:
+      - 3000:3000
+      - 6006:6006
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    environment:
+      - WATCHPACK_POLLING=true
+      - TZ=Asia/Tokyo
+
+volumes:
+  node_modules:
