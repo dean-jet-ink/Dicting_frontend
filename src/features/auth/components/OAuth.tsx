@@ -25,11 +25,11 @@ const OAuth = ({ isLogin }: OAuthProps) => {
   return (
     <div className="flex flex-col gap-3">
       {idPs.map((idP) => (
-        <a href={`${BE_URL}/auth?idp_name=${idP.href}&is_login=${isLogin}`}>
-          <div
-            key={idP.label}
-            className="bg-white hover:bg-subAccent py-2 transition-all duration-300 w-72 rounded-md shadow-md"
-          >
+        <a
+          key={idP.label}
+          href={`${BE_URL}/auth?idp_name=${idP.href}&is_login=${isLogin}`}
+        >
+          <div className="bg-white hover:bg-subAccent py-2 transition-all duration-300 w-72 rounded-md shadow-md">
             <div className="flex items-center font-bold">
               <div className="ml-5">
                 <Image

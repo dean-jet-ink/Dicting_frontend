@@ -1,8 +1,6 @@
 import { BE_URL, ENDPOINT } from "@/config/constants";
 import LoginForm from "@/features/auth/components/LoginForm";
 import OAuth from "@/features/auth/components/OAuth";
-import loginImg from "../../../public/login.svg";
-import Image from "next/image";
 import MyLink from "@/components/link/MyLink";
 import AuthLayout from "@/layouts/AuthLayout";
 import { ReactElement } from "react";
