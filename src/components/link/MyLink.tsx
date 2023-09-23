@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-type MyLinkProps = {
+export type MyLinkProps = {
   label: string;
   href: string;
 };

@@ -39,7 +39,7 @@ const Button = ({
   const buttonStyle = isLoading ? isLoadingButtonStyle : defaultButtonStyle;
 
   return (
-    <button className={buttonStyle}>
+    <button className={buttonStyle} {...props}>
       {isLoading ? (
         <Loading />
       ) : icon ? (

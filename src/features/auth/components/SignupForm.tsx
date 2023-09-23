@@ -1,12 +1,13 @@
-import Input from "@/components/input/Input";
 import { useForm } from "react-hook-form";
+
+import Input from "@/components/input/Input";
 import { SignupForm } from "../types";
 import Button from "@/components/button/Button";
-import { useLogin } from "../api/login";
+import { useSignup } from "../api/signup";
 
 const SignupForm = () => {
   const { register, handleSubmit, formState } = useForm<SignupForm>();
-  const { submit, isLoading } = useLogin();
+  const { submit, isLoading } = useSignup();
 
   const onSubmit = (data: SignupForm) => {
     submit(data);
