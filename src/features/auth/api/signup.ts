@@ -15,7 +15,7 @@ const useSignup = () => {
   const { mutate: submit, isLoading } = useMutation({
     mutationFn: signup,
     onSuccess: () => {
-      router.push("/");
+      router.push("/board");
     },
   });
 

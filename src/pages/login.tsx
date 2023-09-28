@@ -17,7 +17,7 @@ const LoginPage = () => {
       <div>
         <OAuth isLogin={true} />
       </div>
-      <MyLink label="サインアップ" href="/auth/signup" />
+      <MyLink label="サインアップ" href="/signup" />
     </div>
   );
 };
