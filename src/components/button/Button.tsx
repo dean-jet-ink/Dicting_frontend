@@ -4,8 +4,8 @@ import Loading from "../loading/Loading";
 const variants = {
   primary: {
     color: "bg-accent",
-    loading: "bg-violet-400",
-    hover: "hover:bg-violet-400",
+    loading: "bg-rose-600",
+    hover: "hover:bg-rose-700",
   },
   secondary: {
     color: "bg-subAccent",
@@ -34,7 +34,7 @@ const Button = ({
   const { color, loading, hover } = variants[variant];
   const width = size == "lg" ? "w-72" : "w-32";
 
-  const defaultButtonStyle = `${color} ${hover} hover:text-white font-bold h-10 ${width} rounded-sm transition-all duration-200 text-center shadow-md`;
+  const defaultButtonStyle = `${color} ${hover} text-white font-bold h-10 ${width} rounded-sm transition-all duration-200 text-center shadow-md`;
   const isLoadingButtonStyle = `${loading} text-white font-bold h-10 ${width} rounded-sm text-center cursor-default shadow-md`;
   const buttonStyle = isLoading ? isLoadingButtonStyle : defaultButtonStyle;
 

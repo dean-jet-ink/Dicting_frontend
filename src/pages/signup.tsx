@@ -13,7 +13,7 @@ const SignupPage = () => {
       <div>
         <OAuth isLogin={false} />
       </div>
-      <MyLink label="ログイン" href="/auth/login" />
+      <MyLink label="ログイン" href="/login" />
     </div>
   );
 };

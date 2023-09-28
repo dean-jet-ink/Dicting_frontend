@@ -21,10 +21,10 @@ const config: Config = {
         },
       },
       colors: {
-        main: "#f1efe9",
-        sub: "#7e7777",
-        accent: "#cdb6e5",
-        subAccent: "#dfdcdc",
+        main: "#fafafa",
+        sub: "#EDEDED",
+        accent: "#C94349",
+        subAccent: "#beb397",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

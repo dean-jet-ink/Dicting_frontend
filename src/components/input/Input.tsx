@@ -8,7 +8,7 @@ export type InputProps = {
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, ...props }, ref) => {
-    const borderColor = error ? "border-rose-700" : "border-sub";
+    const borderColor = error ? "border-rose-700" : "border-gray-400";
 
     return (
       <div className="w-full">
