@@ -1,11 +1,13 @@
 import { ReactNode, useLayoutEffect } from "react";
-import { parseCookies } from "nookies";
 
 import Header from "@/components/header/Header";
 import UserMenu from "@/features/user/components/UserMenu";
 import Title from "@/components/title/Title";
 import axios from "axios";
 import { useRouter } from "next/router";
+import CreateEnglishButton from "@/features/english/components/CreateEnglishButton";
+import SearchEnglishInput from "@/features/english/components/SearchEnglishField";
+import FilterEnglishField from "@/features/english/components/FilterEnglishField";
 
 type BaseLayoutProps = {
   children: ReactNode;
@@ -33,9 +35,18 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
   return (
     <div className="h-screen">
       <Header>
-        <div className="flex items-center gap-10">
-          <UserMenu />
-          <Title />
+        <div className="flex justify-between items-center w-full lg:mr-12">
+          <div className="flex items-center gap-10">
+            <UserMenu />
+            <Title />
+          </div>
+          <div className="flex justify-center items-center gap-8">
+            <FilterEnglishField />
+            <div className="w-80">
+              <SearchEnglishInput />
+            </div>
+            <CreateEnglishButton />
+          </div>
         </div>
       </Header>
       {children}

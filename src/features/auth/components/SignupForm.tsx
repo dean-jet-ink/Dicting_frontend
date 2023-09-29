@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import Input from "@/components/input/Input";
+import Input from "@/components/form/Input";
 import { SignupForm } from "../types";
 import Button from "@/components/button/Button";
 import { useSignup } from "../api/signup";

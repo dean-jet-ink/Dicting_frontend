@@ -23,7 +23,7 @@ const config: Config = {
       colors: {
         main: "#fafafa",
         sub: "#EDEDED",
-        accent: "#C94349",
+        accent: "#6C63FF",
         subAccent: "#beb397",
       },
       backgroundImage: {
