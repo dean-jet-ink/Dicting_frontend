@@ -1,9 +1,9 @@
 import React from "react";
 
-import Search from "../../../components/search/Search";
-import useSearch from "../../../store/search/search";
+import Search from "../../../../components/search/Search";
+import useSearch from "../../../../store/search/search";
 import { useForm } from "react-hook-form";
-import { SearchedWord } from "../types";
+import { SearchedWord } from "../../types";
 
 const SearchEnglishField = () => {
   const { setSearchedWord } = useSearch();

@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
 
-import Select, { Option } from "../../../components/form/Select";
-import { useFilter } from "../../../store/filter/filter";
-import { FilterType } from "../../../store/filter/filter";
+import Select, { Option } from "../../../../components/form/Select";
+import { useFilter } from "../../../../store/filter/filter";
+import { FilterType } from "../../../../store/filter/filter";
 
 const FilterEnglishField = () => {
   const { filterType, setFilterType } = useFilter();
