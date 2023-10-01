@@ -1,4 +1,4 @@
-import Input from "@/components/input/Input";
+import Input from "@/components/form/Input";
 import { useForm } from "react-hook-form";
 import { Credential } from "../types";
 import Button from "@/components/button/Button";

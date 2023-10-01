@@ -29,7 +29,7 @@ const OAuth = ({ isLogin }: OAuthProps) => {
           key={idP.label}
           href={`${BE_URL}/auth?idp_name=${idP.href}&is_login=${isLogin}`}
         >
-          <div className="bg-white hover:bg-subAccent py-2 transition-all duration-300 w-72 rounded-md shadow-md">
+          <div className="bg-white hover:bg-gray-100 py-2 transition-all duration-300 w-72 rounded-md shadow-md">
             <div className="flex items-center font-bold">
               <div className="ml-5">
                 <Image

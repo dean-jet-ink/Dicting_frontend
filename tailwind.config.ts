@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -23,9 +24,10 @@ const config: Config = {
       colors: {
         main: "#fafafa",
         sub: "#EDEDED",
-        accent: "#C94349",
+        accent: "#6C63FF",
         subAccent: "#beb397",
       },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -33,6 +35,18 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".arrow-right": {
+          width: "40px",
+          height: "8px",
+          "border-bottom": "solid 1px",
+          "border-right": "solid 1px",
+          transform: "skew(45deg)",
+        },
+      });
+    }),
+  ],
 };
 export default config;

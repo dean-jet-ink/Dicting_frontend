@@ -4,8 +4,8 @@ import Loading from "../loading/Loading";
 const variants = {
   primary: {
     color: "bg-accent",
-    loading: "bg-rose-600",
-    hover: "hover:bg-rose-700",
+    loading: "bg-indigo-600",
+    hover: "hover:bg-indigo-600",
   },
   secondary: {
     color: "bg-subAccent",
