@@ -8,9 +8,9 @@ const variants = {
     hover: "hover:bg-indigo-600",
   },
   secondary: {
-    color: "bg-subAccent",
-    loading: "bg-sub",
-    hover: "hover:bg-sub",
+    color: "bg-gray-400",
+    loading: "bg-gray-500",
+    hover: "hover:bg-gray-500",
   },
 };
 

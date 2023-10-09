@@ -4,22 +4,23 @@ const variants = {
 };
 
 export type LoadingProps = {
+  bg?: "bg-white" | "bg-gray-600";
   variant?: keyof typeof variants;
 };
 
-const Loading = ({ variant = "small" }: LoadingProps) => {
+const Loading = ({ bg = "bg-white", variant = "small" }: LoadingProps) => {
   const { width, height, space } = variants[variant];
 
   return (
     <div className={`${space} flex justify-center`}>
       <div
-        className={`${width} ${height} animate-ping  bg-gray-600 rounded-full`}
+        className={`${width} ${height} animate-ping  ${bg} rounded-full`}
       ></div>
       <div
-        className={`${width} ${height} animate-ping bg-gray-600 rounded-full animation-delay-200`}
+        className={`${width} ${height} animate-ping ${bg} rounded-full animation-delay-200`}
       ></div>
       <div
-        className={`${width} ${height} animate-ping bg-gray-600 rounded-full animation-delay-400`}
+        className={`${width} ${height} animate-ping ${bg} rounded-full animation-delay-400`}
       ></div>
     </div>
   );

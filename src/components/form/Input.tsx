@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           className={`border-b ${borderColor} py-2 focus-within:border-violet-400 transition-all duration-300`}
         >
           <input
-            className="appearance-none bg-transparent border-none w-full py-1 px-2 focus:outline-none"
+            className="appearance-none bg-transparent border-none w-full py-1 px-2 focus:outline-none cursor-text"
             {...props}
             ref={ref}
           />
