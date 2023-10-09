@@ -1,14 +1,46 @@
-export type SearchedWord = {
-  searchedWord: string;
+export type EnglishContent = {
+  content: string;
 };
 
 export type Proficiency = "Learning" | "Understand" | "Mastered";
 
+export type Example = {
+  id?: string;
+  example: string;
+  translation: string;
+};
+
+export type Img = {
+  id?: string;
+  url: string;
+  is_thumbnail: boolean;
+};
+
 export type EnglishItem = {
   id: string;
   content: string;
-  translation: string;
-  enExplanation: string;
-  image: string;
+  translations: string[];
+  en_explanation: string;
+  examples: Example[];
+  imgs: Img[];
   proficiency: Proficiency;
+  exp: number;
 };
+
+export type Proposal = Omit<
+  EnglishItem,
+  "id" | "examples" | "imgs" | "proficiency" | "exp"
+> & { examples: Omit<Example, "id">[] };
+
+export type Translation = {
+  translation: string;
+};
+
+export type EnglishItemForm = Omit<
+  EnglishItem,
+  "translations" | "proficiency" | "exp"
+> & {
+  translations: Translation[];
+};
+
+export type CreateEnglishItem = Omit<EnglishItem, "id" | "proficiency" | "exp">;

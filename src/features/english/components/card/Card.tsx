@@ -1,13 +1,13 @@
 import { EnglishItem } from "../../types/index";
 import ProficiencyIcon from "./Proficiency";
 
-export type CardProps = Omit<EnglishItem, "id">;
+export type CardProps = Omit<EnglishItem, "id" | "examples">;
 
 const Card = ({
   content,
-  translation,
-  enExplanation,
-  image,
+  translations,
+  en_explanation,
+  images,
   proficiency,
 }: CardProps) => {
   return (
@@ -23,9 +23,13 @@ const Card = ({
       <div className="flex justify-between items-center">
         <div className="w-full pl-9 pr-2">
           <h3 className="text-md mb-3">{content}</h3>
-          <p className="text-xs">{translation}</p>
+          <p className="text-xs">{...translations}</p>
         </div>
-        <img src={image} alt="" className="w-28 h-24 object-cover rounded-sm" />
+        <img
+          src={images[0]}
+          alt=""
+          className="w-28 h-24 object-cover rounded-sm"
+        />
       </div>
     </div>
   );

@@ -3,13 +3,38 @@
 @tailwind utilities;
 
 body {
-  background-color: #fafafa;
-  color: #333;
+  @apply bg-main text-gray-800 leading-6;
+}
+
+body {
   font-family: Century, "游明朝", "Hiragino Kaku Gothic ProN",
     "ヒラギノ角ゴ ProN W3", Arial, nc3Jp, sans-serif !important;
-  line-height: 1.5rem;
 }
 
 body * {
-  letter-spacing: 0.05em;
+  @apply tracking-widest;
+}
+
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-subAccent rounded-sm;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+#googlesearch form {
+  @apply hidden;
+}
+
+.gsc-control-cse {
+  @apply invisible p-0;
+}
+
+.gsc-positioningWrapper {
+  @apply invisible;
 }

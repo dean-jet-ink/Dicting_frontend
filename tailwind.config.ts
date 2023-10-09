@@ -27,7 +27,18 @@ const config: Config = {
         accent: "#6C63FF",
         subAccent: "#beb397",
       },
-
+      width: {
+        "102": "28rem",
+        "106": "32rem",
+      },
+      minWidth: {
+        "96": "24rem",
+        "102": "28rem",
+        "106": "32rem",
+      },
+      maxHeight: {
+        custom: "calc(100vh - 4rem)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
