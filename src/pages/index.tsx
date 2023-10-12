@@ -4,11 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout";
 import CardList from "@/features/english/components/card-list/CardList";
 
 const TopPage = () => {
-  return (
-    <div className="mt-14">
-      <CardList />
-    </div>
-  );
+  return <CardList />;
 };
 
 TopPage.getLayout = (page: ReactElement) => {

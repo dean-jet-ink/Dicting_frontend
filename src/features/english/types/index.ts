@@ -27,6 +27,14 @@ export type EnglishItem = {
   exp: number;
 };
 
+export type EnglishItemInfo = Omit<EnglishItem, "examples" | "imgs"> & {
+  img: string;
+};
+
+export type EnglishItems = {
+  english_items: EnglishItemInfo[];
+};
+
 export type Proposal = Omit<
   EnglishItem,
   "id" | "examples" | "imgs" | "proficiency" | "exp"

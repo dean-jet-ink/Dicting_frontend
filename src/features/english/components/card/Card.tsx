@@ -1,13 +1,15 @@
-import { EnglishItem } from "../../types/index";
+import { EnglishItemInfo } from "../../types/index";
 import ProficiencyIcon from "./Proficiency";
+import noImage from "../../../../../public/noImage.png";
+import Image from "next/image";
 
-export type CardProps = Omit<EnglishItem, "id" | "examples">;
+export type CardProps = EnglishItemInfo;
 
 const Card = ({
   content,
   translations,
   en_explanation,
-  images,
+  img,
   proficiency,
 }: CardProps) => {
   return (
@@ -21,15 +23,21 @@ const Card = ({
         className="absolute w-3 h-3 left-2 bg-main border border-gray-400 rounded-full"
       ></div>
       <div className="flex justify-between items-center">
-        <div className="w-full pl-9 pr-2">
+        <div style={{ flex: "70%" }} className="w-full pl-9 pr-2">
           <h3 className="text-md mb-3">{content}</h3>
-          <p className="text-xs">{...translations}</p>
+          <p className="text-xs">{translations.join(", ")}</p>
         </div>
-        <img
-          src={images[0]}
-          alt=""
-          className="w-28 h-24 object-cover rounded-sm"
-        />
+        <div style={{ flex: "30%" }}>
+          {img === "" ? (
+            <Image
+              src={noImage}
+              alt=""
+              className="h-20 object-cover rounded-sm"
+            />
+          ) : (
+            <img src={img} alt="" className="h-20 object-cover rounded-sm" />
+          )}
+        </div>
       </div>
     </div>
   );

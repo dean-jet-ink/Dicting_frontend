@@ -8,10 +8,14 @@ import MeaningForm from "./form/MeaningForm";
 import ImageForm from "./form/ImageForm";
 import { useEffect, useState } from "react";
 import ExampleForm from "./form/ExampleForm";
+import { useCreateEnglishItem } from "../../api/create-english-item";
+import { useNotification } from "@/store/notification/notification";
+import ProficiencyIcon from "../card/Proficiency";
 
 type DetailProps = {
   englishItem: EnglishItem;
   isCreate?: boolean;
+  closeCreateModal?: () => void;
 };
 
 const Detail = ({
@@ -24,7 +28,16 @@ const Detail = ({
     proficiency,
   },
   isCreate = false,
+  closeCreateModal,
 }: DetailProps) => {
+  const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    if (isCreate) {
+      setIsEdit(true);
+    }
+  }, []);
+
   const { register, handleSubmit, control, formState, getValues, setValue } =
     useForm<EnglishItemForm>({
       defaultValues: {
@@ -47,13 +60,22 @@ const Detail = ({
     name: "examples",
   });
 
-  const [isEdit, setIsEdit] = useState(false);
+  const { showNotification } = useNotification();
 
-  useEffect(() => {
-    if (isCreate) {
-      setIsEdit(true);
-    }
-  }, []);
+  const onSuccessCreate = () => {
+    showNotification({
+      type: "success",
+      title: "Create english item",
+      message: `【${content}】を作成しました`,
+      duration: 3000,
+    });
+
+    close();
+  };
+
+  const { submit, isLoading } = useCreateEnglishItem({
+    onSuccess: onSuccessCreate,
+  });
 
   const onSubmit = ({
     content,
@@ -71,15 +93,21 @@ const Detail = ({
       imgs,
     };
 
-    console.log(englishItemForm);
+    submit(englishItemForm);
   };
 
   const onClickSubmit = () => {
     handleSubmit(onSubmit)();
+    closeCreateModal?.();
   };
 
   return (
     <div className="w-106">
+      {isCreate ?? (
+        <div className="mb-8 relative">
+          <ProficiencyIcon proficiency={proficiency} size="w-6" />
+        </div>
+      )}
       <div className="flex items-center justify-center gap-4 mb-8">
         <h2 className="text-2xl">{content}</h2>
         <Volume2 className="cursor-pointer" />
@@ -130,7 +158,9 @@ const Detail = ({
 
       {isCreate && (
         <div className="w-fit m-auto mt-12">
-          <Button onClick={onClickSubmit}>登録</Button>
+          <Button onClick={onClickSubmit} isLoading={isLoading}>
+            {isCreate ? "登録" : "更新"}
+          </Button>
         </div>
       )}
     </div>

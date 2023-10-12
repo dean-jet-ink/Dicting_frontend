@@ -1,28 +1,27 @@
 import apiClient from "@/lib/api_client";
-import { EnglishItem } from "../types";
+import { EnglishItems } from "../types";
 import { useQuery } from "@tanstack/react-query";
-import queryClient from "@/lib/react_query";
 
 type useGetEnglishItemsOptions = {
-  onSuccess?: (englishItems: EnglishItem[]) => void;
+  onSuccess?: (englishItemInfos: EnglishItems) => void;
 };
 
 const useGetEnglishItems = ({ onSuccess }: useGetEnglishItemsOptions) => {
   const getEnglishItems = async () => {
-    const res = await apiClient.get<EnglishItem[]>("/english");
+    const res = await apiClient.get<EnglishItems>("/english");
 
     return res.data;
   };
 
   const { data, isLoading } = useQuery({
+    queryKey: ["englishItems"],
     queryFn: getEnglishItems,
     onSuccess: (englishItems) => {
-      queryClient.setQueryData(["englishItems"], englishItems);
       onSuccess?.(englishItems);
     },
   });
 
-  return { data, isLoading };
+  return { data: data!, isLoading };
 };
 
 export { useGetEnglishItems };
