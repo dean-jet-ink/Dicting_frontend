@@ -33,7 +33,7 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
   }, []);
 
   return (
-    <div className="h-screen max-w-7xl m-auto pt-20">
+    <div className="h-screen max-w-7xl m-auto">
       <Header>
         <div className="flex justify-between items-center w-full">
           <div className="flex items-center gap-10">

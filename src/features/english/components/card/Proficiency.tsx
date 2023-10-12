@@ -5,9 +5,10 @@ import { useState } from "react";
 
 type ProficiencyProps = {
   proficiency: Proficiency;
+  size?: "w-3" | "w-6";
 };
 
-const ProficiencyIcon = ({ proficiency }: ProficiencyProps) => {
+const ProficiencyIcon = ({ proficiency, size = "w-3" }: ProficiencyProps) => {
   const [isOpen, setOpen] = useState(false);
 
   const baseAnnotationStyle =
@@ -17,11 +18,16 @@ const ProficiencyIcon = ({ proficiency }: ProficiencyProps) => {
 
   const appliedStyle = isOpen ? visible : invisible;
 
+  let mouseEnterTimer: NodeJS.Timeout;
+
   const onMouseEnterHandler = () => {
-    setOpen(true);
+    mouseEnterTimer = setTimeout(() => {
+      setOpen(true);
+    }, 300);
   };
 
   const onMouseLeaveHandler = () => {
+    clearTimeout(mouseEnterTimer);
     setOpen(false);
   };
 
@@ -35,11 +41,11 @@ const ProficiencyIcon = ({ proficiency }: ProficiencyProps) => {
       onTouchEnd={onMouseLeaveHandler}
     >
       {proficiency === "Learning" ? (
-        <PenLine className="w-5 text-gray-500 text-sm" />
+        <PenLine className={`w-5 text-gray-500 ${size}`} />
       ) : proficiency === "Understand" ? (
-        <Lightbulb className="w-5 text-amber-500" />
+        <Lightbulb className={`w-5 text-amber-500 ${size}`} />
       ) : (
-        <Award className="w-5 text-accent" />
+        <Award className={`w-5 text-accent ${size}`} />
       )}
       <div className={appliedStyle}>{proficiency}</div>
     </div>

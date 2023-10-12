@@ -29,21 +29,29 @@ const dummyProposal = {
   ],
 };
 
-const CreateEnglishForm = (props: CreateEnglishFormProps) => {
+const CreateEnglishForm = ({ isOpen, close }: CreateEnglishFormProps) => {
   const proposal = queryClient.getQueryData<Proposal>(["proposal"]);
 
   if (ENV === "dev") {
     return (
-      <Modal {...props}>
-        <Detail englishItem={dummyProposal as EnglishItem} isCreate={true} />
+      <Modal isOpen={isOpen} close={close}>
+        <Detail
+          englishItem={dummyProposal as EnglishItem}
+          isCreate={true}
+          closeCreateModal={close}
+        />
       </Modal>
     );
   }
 
   return (
-    <Modal {...props}>
+    <Modal isOpen={isOpen} close={close}>
       {proposal && (
-        <Detail englishItem={proposal as EnglishItem} isCreate={true} />
+        <Detail
+          englishItem={proposal as EnglishItem}
+          isCreate={true}
+          closeCreateModal={close}
+        />
       )}
     </Modal>
   );

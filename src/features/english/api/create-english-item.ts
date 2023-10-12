@@ -5,20 +5,20 @@ import apiClient from "@/lib/api_client";
 import queryClient from "@/lib/react_query";
 
 type useCreateEnglishItemOptions = {
-  onSuccess?: (englishItem: EnglishItem) => void;
+  onSuccess?: () => void;
 };
 
 const useCreateEnglishItem = ({ onSuccess }: useCreateEnglishItemOptions) => {
   const createEnglishItem = async (englishItem: CreateEnglishItem) => {
-    const res = await apiClient.post<EnglishItem>("/english", englishItem);
+    const res = await apiClient.post("/english", englishItem);
     return res.data;
   };
 
   const { mutate: submit, isLoading } = useMutation({
     mutationFn: createEnglishItem,
-    onSuccess: (englishItem) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["englishItems"]);
-      onSuccess?.(englishItem);
+      onSuccess?.();
     },
   });
 

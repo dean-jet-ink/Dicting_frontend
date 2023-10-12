@@ -1,76 +1,21 @@
 import Image from "next/image";
 
-import { EnglishItem } from "@/features/english/types";
 import noItems from "@/../public/noItems.svg";
-import Card from "@/features/english/components/card/Card";
+import { useGetEnglishItems } from "../../api/get-english-items";
+import Loading from "@/components/loading/Loading";
+import Card from "../card/Card";
 
 const CardList = () => {
-  const items: Omit<EnglishItem, "examples">[] = [
-    {
-      id: "a",
-      content: "Apple",
-      translations: ["りんご"],
-      en_explanation: "fruits",
-      images: [
-        "https://video.kurashiru.com/production/articles/fda43e08-0b80-491b-9424-ad137ecc6067/wide_thumbnail_large.jpg?1680142474",
-      ],
-      proficiency: "Learning",
-    },
-    {
-      id: "b",
-      content: "Apple",
-      translations: ["りんご"],
-      en_explanation: "fruits",
-      images: [
-        "https://video.kurashiru.com/production/articles/fda43e08-0b80-491b-9424-ad137ecc6067/wide_thumbnail_large.jpg?1680142474",
-      ],
-      proficiency: "Understand",
-    },
-    {
-      id: "c",
-      content: "Apple",
-      translations: ["りんご"],
-      en_explanation: "fruits",
-      images: [
-        "https://video.kurashiru.com/production/articles/fda43e08-0b80-491b-9424-ad137ecc6067/wide_thumbnail_large.jpg?1680142474",
-      ],
-      proficiency: "Learning",
-    },
-    {
-      id: "c",
-      content: "Apple",
-      translations: ["りんご"],
-      en_explanation: "fruits",
-      images: [
-        "https://video.kurashiru.com/production/articles/fda43e08-0b80-491b-9424-ad137ecc6067/wide_thumbnail_large.jpg?1680142474",
-      ],
-      proficiency: "Mastered",
-    },
-    {
-      id: "c",
-      content: "Apple",
-      translations: ["りんご"],
-      en_explanation: "fruits",
-      images: [
-        "https://video.kurashiru.com/production/articles/fda43e08-0b80-491b-9424-ad137ecc6067/wide_thumbnail_large.jpg?1680142474",
-      ],
-      proficiency: "Learning",
-    },
-    {
-      id: "c",
-      content: "Apple",
-      translations: ["りんご"],
-      en_explanation: "fruits",
-      images: [
-        "https://video.kurashiru.com/production/articles/fda43e08-0b80-491b-9424-ad137ecc6067/wide_thumbnail_large.jpg?1680142474",
-      ],
-      proficiency: "Understand",
-    },
-  ];
+  const { data, isLoading } = useGetEnglishItems({});
 
-  if (items.length === 0) {
+  if (isLoading) {
+    return <Loading variant="mid" />;
+  }
+  debugger;
+
+  if (data && data.english_items.length === 0) {
     return (
-      <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center -mt-14">
         <div className="flex justify-center items-center gap-14">
           <div className="flex flex-col gap-2">
             <p>単語やフレーズを登録して</p>
@@ -83,10 +28,11 @@ const CardList = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-start gap-x-3 gap-y-7">
-      {items.map((item) => {
-        return <Card key={item.id} {...item} />;
-      })}
+    <div className="flex flex-wrap justify-start gap-x-3 gap-y-7 mt-32">
+      {data &&
+        data.english_items.map((item) => {
+          return <Card key={item.id} {...item} />;
+        })}
     </div>
   );
 };
