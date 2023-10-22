@@ -4,16 +4,40 @@ import noItems from "@/../public/noItems.svg";
 import { useGetEnglishItems } from "../../api/get-english-items";
 import Loading from "@/components/loading/Loading";
 import Card from "../card/Card";
+import SideMenu from "@/components/sidemenu/SideMenu";
+import Detail from "../detail/Detail";
+import { useState } from "react";
+import { useGetEnglishItem } from "../../api/get-english-item";
 
 const CardList = () => {
-  const { data, isLoading } = useGetEnglishItems({});
+  const { data: items, isLoading: isLoadingItems } = useGetEnglishItems({});
 
-  if (isLoading) {
+  const {
+    submit,
+    data: item,
+    isLoading: isLoadingItem,
+  } = useGetEnglishItem({});
+  const [isOpen, setOpen] = useState(false);
+
+  const openDetail = (content: string) => {
+    submit(content);
+
+    document.body.style["overflow"] = "hidden";
+
+    setOpen(true);
+  };
+
+  const closeDetail = () => {
+    setOpen(false);
+
+    document.body.style["overflow"] = "auto";
+  };
+
+  if (isLoadingItems) {
     return <Loading variant="mid" />;
   }
-  debugger;
 
-  if (data && data.english_items.length === 0) {
+  if (items && items.english_items.length === 0) {
     return (
       <div className="h-screen flex justify-center items-center -mt-14">
         <div className="flex justify-center items-center gap-14">
@@ -28,12 +52,24 @@ const CardList = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-start gap-x-3 gap-y-7 mt-32">
-      {data &&
-        data.english_items.map((item) => {
-          return <Card key={item.id} {...item} />;
-        })}
-    </div>
+    <>
+      <div className="flex flex-wrap justify-start gap-x-20 gap-y-11 mt-32">
+        {items &&
+          items.english_items.map((item) => {
+            return <Card key={item.id} openDetail={openDetail} {...item} />;
+          })}
+      </div>
+
+      <SideMenu isOpen={isOpen} close={closeDetail}>
+        {!isLoadingItem && item ? (
+          <Detail englishItem={item} getEnglishItem={submit} />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <Loading variant="mid" bg="bg-gray-600" />
+          </div>
+        )}
+      </SideMenu>
+    </>
   );
 };
 

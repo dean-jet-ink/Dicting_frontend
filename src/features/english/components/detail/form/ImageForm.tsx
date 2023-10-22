@@ -1,52 +1,62 @@
 import { useCallback, useState } from "react";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { UseFieldArrayReturn } from "react-hook-form";
 
 import { EnglishItemForm, Img } from "@/features/english/types";
 import ImageSearch from "../../image-search/ImageSearch";
 import EnglishImg from "../../english-img/EnglishImg";
 import EnglishItemFormContainer from "./EnglishItemFormContainer";
-import { Trash2 } from "lucide-react";
+import { Trash } from "lucide-react";
+import Slider from "@/components/slider/Slider";
+import Modal from "@/components/modal/Modal";
 
 type ImageFormProps = {
   isEdit: boolean;
   content: string;
-  getValues: UseFormGetValues<EnglishItemForm>;
-  setValue: UseFormSetValue<EnglishItemForm>;
+  imgs: Img[];
+  imgFields: UseFieldArrayReturn<EnglishItemForm, "imgs", "id">;
 };
 
 const ImageForm = ({
   isEdit,
   content,
-  getValues,
-  setValue,
+  imgs,
+  imgFields: { fields, update, append, remove },
 }: ImageFormProps) => {
-  const [imgs, setImgs] = useState<Img[]>(getValues("imgs") ?? []);
+  const [isOpen, setOpen] = useState(false);
 
-  const appendImg = useCallback((img: string) => {
-    setImgs((pre) => {
-      let newImgs: Img[] = [];
+  const openModal = () => {
+    setOpen(true);
+  };
 
-      if (pre.length === 0) {
-        newImgs = [...pre, { url: img, is_thumbnail: true }];
+  const closeModal = () => {
+    setOpen(false);
+  };
+
+  const [selectedImg, setSelectedImg] = useState("");
+
+  console.log(fields);
+
+  const SelectImg = (img: string) => {
+    setSelectedImg(img);
+  };
+
+  const appendImg = useCallback(
+    (url: string) => {
+      if (fields.length === 0) {
+        append({ url, is_thumbnail: true });
       } else {
-        newImgs = [...pre, { url: img, is_thumbnail: false }];
+        append({ url, is_thumbnail: false });
       }
-
-      setValue("imgs", newImgs);
-      return newImgs;
-    });
-  }, []);
+    },
+    [fields]
+  );
 
   const removeImg = (index: number) => {
-    setImgs((pre) => {
-      const newImgs = pre.filter((_, i) => i !== index);
+    if (index === 0 && fields.length > 1) {
+      update(1, { ...fields[1], is_thumbnail: true });
+    }
 
-      if (newImgs.length !== 0 && index === 0) newImgs[0].is_thumbnail = true;
-
-      setValue("imgs", newImgs);
-
-      return newImgs;
-    });
+    remove(index);
   };
 
   if (isEdit) {
@@ -54,39 +64,59 @@ const ImageForm = ({
       <EnglishItemFormContainer title="Image">
         <ImageSearch search={content} setImg={appendImg} />
 
-        <div className="flex gap-10 items-end justify-start flex-wrap">
-          {imgs &&
-            imgs.map(({ url, is_thumbnail }, index) => (
-              <div className="relative">
-                <EnglishImg
-                  key={`${url}:${index}`}
-                  isThumbnail={is_thumbnail}
-                  img={url}
-                />
-                <Trash2
-                  className="absolute top-0 -right-6 w-5 h-5 cursor-pointer"
-                  onClick={() => removeImg(index)}
-                />
-              </div>
-            ))}
+        <div className="flex gap-10 items-end justify-start flex-wrap mt-8">
+          {fields.length !== 0 && (
+            <Slider
+              contents={fields.map(({ id, url, is_thumbnail }, index) => (
+                <div key={id} className="relative">
+                  <EnglishImg
+                    isThumbnail={is_thumbnail}
+                    img={url}
+                    SelectImg={SelectImg}
+                    openZoomImg={openModal}
+                  />
+                  <div
+                    className="w-fit p-1 rounded-full bg-sub border border-gray-300 absolute top-1 right-1 cursor-pointer"
+                    onClick={() => removeImg(index)}
+                  >
+                    <Trash className="w-5 h-5" />
+                  </div>
+                </div>
+              ))}
+            />
+          )}
         </div>
+
+        {isOpen && (
+          <Modal isOpen={isOpen} close={closeModal} bg="bg-transparent">
+            <img src={selectedImg} alt="" className="mt-5" />
+          </Modal>
+        )}
       </EnglishItemFormContainer>
     );
   }
 
   return (
     <EnglishItemFormContainer title="Image">
-      {imgs ? (
-        imgs.map(({ url, is_thumbnail }, index) => (
-          <EnglishImg
-            key={`${url}:${index}`}
-            isThumbnail={is_thumbnail}
-            img={url}
-          />
-        ))
+      {imgs && imgs.length !== 0 ? (
+        <Slider
+          contents={imgs.map(({ url, is_thumbnail }, index) => (
+            <EnglishImg
+              key={`${url}:${index}`}
+              isThumbnail={is_thumbnail}
+              img={url}
+              SelectImg={setSelectedImg}
+              openZoomImg={openModal}
+            />
+          ))}
+        />
       ) : (
         <div>イメージがありません</div>
       )}
+
+      <Modal isOpen={isOpen} close={closeModal} bg="bg-transparent">
+        <img src={selectedImg} alt="" className="mt-5" />
+      </Modal>
     </EnglishItemFormContainer>
   );
 };

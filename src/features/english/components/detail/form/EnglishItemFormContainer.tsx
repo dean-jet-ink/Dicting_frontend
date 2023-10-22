@@ -14,7 +14,7 @@ const EnglishItemFormContainer = ({
     <div>
       <h3 className="text-subAccent">{title}</h3>
       <Border />
-      {children}
+      <div className="px-4 py-6">{children}</div>
     </div>
   );
 };

@@ -27,8 +27,17 @@ body * {
   @apply bg-transparent;
 }
 
+#googlesearch {
+  height: 0;
+  width: 0;
+}
+
 #googlesearch form {
   @apply hidden;
+}
+
+.gsc-results-wrapper-overlay.gsc-results-wrapper-visible {
+  @apply !z-[60];
 }
 
 .gsc-control-cse {
@@ -37,4 +46,39 @@ body * {
 
 .gsc-positioningWrapper {
   @apply invisible;
+}
+
+/* スライダー */
+.swiper-slide {
+  width: fit-content !important;
+}
+
+.swiper-button-next {
+  color: #9d9d9d !important;
+  position: initial !important;
+  display: grid !important;
+  place-content: center !important;
+  width: 2.4rem !important;
+  height: 2.4rem !important;
+  cursor: pointer !important;
+  transition: 0.3s !important;
+}
+
+.swiper-button-prev {
+  color: #9d9d9d !important;
+  position: initial !important;
+  display: grid !important;
+  place-content: center !important;
+  width: 2.4rem !important;
+  height: 2.4rem !important;
+  cursor: pointer !important;
+  transition: 0.3s !important;
+}
+
+.swiper-button-next::after {
+  content: "" !important;
+}
+
+.swiper-button-prev::after {
+  content: "" !important;
 }

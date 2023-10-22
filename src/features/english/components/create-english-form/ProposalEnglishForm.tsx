@@ -4,36 +4,41 @@ import { useProposal } from "../../api/proposal";
 import { useForm } from "react-hook-form";
 import { EnglishContent, Proposal } from "../../types";
 import { ENV } from "@/config/constants";
+import { useState } from "react";
+import CreateEnglishForm from "./CreateEnglishForm";
 
-type PreCreateEnglishFormProps = {
-  close: () => void;
-  openForm: () => void;
+type ProposalEnglishFormProps = {
+  closeProposalModal: () => void;
 };
 
-const PreCreateEnglishForm = ({
-  close,
-  openForm,
-}: PreCreateEnglishFormProps) => {
-  const onSuccess = (proposal: Proposal) => {
-    openForm();
-    close();
+const ProposalEnglishForm = ({
+  closeProposalModal,
+}: ProposalEnglishFormProps) => {
+  const [isOpen, setOpen] = useState(false);
+
+  const openCreateForm = () => {
+    setOpen(true);
   };
 
-  const { submit, isLoading } = useProposal({ onSuccess });
+  const closeCreateForm = () => {
+    closeProposalModal();
+    setOpen(false);
+  };
+
+  const onSuccess = (proposal: Proposal) => {
+    openCreateForm();
+  };
+
+  const { data, submit, isLoading } = useProposal({ onSuccess });
 
   const { register, handleSubmit, formState } = useForm<EnglishContent>();
 
   const onSubmit = (data: EnglishContent) => {
-    if (ENV === "dev") {
-      openForm();
-      close();
-    } else {
-      submit(data);
-    }
+    submit(data);
   };
 
   return (
-    <>
+    <div>
       <div className="text-center">
         <label htmlFor="create-english" className="block mb-8">
           登録する英語を入力してください
@@ -54,8 +59,16 @@ const PreCreateEnglishForm = ({
           </Button>
         </div>
       </form>
-    </>
+
+      {!isLoading && (
+        <CreateEnglishForm
+          proposal={data!}
+          isOpen={isOpen}
+          close={closeCreateForm}
+        />
+      )}
+    </div>
   );
 };
 
-export default PreCreateEnglishForm;
+export default ProposalEnglishForm;

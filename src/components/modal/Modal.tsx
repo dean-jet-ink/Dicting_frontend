@@ -5,26 +5,54 @@ export type ModalProps = {
   isOpen: boolean;
   close: () => void;
   children: ReactNode;
+  bg?: "bg-sub" | "bg-transparent";
+  isMask?: boolean;
+  zIndex?:
+    | "z-10"
+    | "z-20"
+    | "z-30"
+    | "z-40"
+    | "z-50"
+    | "z-[60]"
+    | "z-[70]"
+    | "z-[80]"
+    | "z-[90]"
+    | "z-[100]"
+    | "z-[1000]";
 };
 
-const Modal = ({ isOpen, close, children }: ModalProps) => {
+const Modal = ({
+  isOpen,
+  close,
+  children,
+  bg = "bg-sub",
+  isMask = true,
+  zIndex = "z-50",
+}: ModalProps) => {
   const baseModalStyle =
-    "fixed top-0 bottom-0 left-0 right-0 p-4  md:inset-0 transition-all duration-200 flex justify-center items-center";
-  const openStyle = `${baseModalStyle} z-50 opacity-100 pointer-events-auto`;
+    "fixed inset-0 transition-all duration-200 flex justify-center items-center";
+  const openStyle = `${baseModalStyle} ${zIndex} opacity-100 pointer-events-auto`;
   const closeStyle = `${baseModalStyle} -z-50 opacity-0 pointer-events-none`;
 
-  const appliedStyle = isOpen ? openStyle : closeStyle;
-
   return (
-    <div className={appliedStyle}>
+    <div className={isOpen ? openStyle : closeStyle}>
       <div
-        className="w-full h-full bg-black absolute z-40 opacity-50"
+        className={`w-full h-full ${
+          isMask ? "bg-black" : "bg-transparent"
+        } absolute z-40 opacity-50`}
         onClick={close}
       ></div>
-      <div className="max-h-custom max-w-3xl bg-main p-6 rounded-sm absolute z-50 overflow-x-hidden overflow-y-auto">
-        <div className="w-full">
-          <X className="text-gray-400 ml-auto cursor-pointer" onClick={close} />
-        </div>
+      <div
+        className={`max-h-custom max-w-3xl ${bg} p-6 rounded-sm absolute z-50 overflow-x-hidden overscroll-contain`}
+      >
+        {bg === "bg-sub" && (
+          <div className="w-full">
+            <X
+              className="text-gray-400 ml-auto cursor-pointer"
+              onClick={close}
+            />
+          </div>
+        )}
         {children}
       </div>
     </div>

@@ -8,8 +8,8 @@ export type HeaderProps = {
 
 const Header = ({ children }: HeaderProps) => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-4 max-w-7xl m-auto">
-      <div className="flex items-center h-14">{children}</div>
+    <header className="bg-main fixed top-0 left-0 right-0 z-50 py-4">
+      <div className="flex items-center h-14 max-w-7xl m-auto">{children}</div>
     </header>
   );
 };
