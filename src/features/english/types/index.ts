@@ -44,11 +44,12 @@ export type Translation = {
   translation: string;
 };
 
-export type EnglishItemForm = Omit<
-  EnglishItem,
-  "translations" | "proficiency" | "exp"
-> & {
+export type EnglishItemForm = Omit<EnglishItem, "translations"> & {
   translations: Translation[];
 };
 
 export type CreateEnglishItem = Omit<EnglishItem, "id" | "proficiency" | "exp">;
+
+export type DeleteEnglishItem = {
+  id: string;
+};

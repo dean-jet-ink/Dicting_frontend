@@ -1,21 +1,16 @@
 import Modal from "@/components/modal/Modal";
-import PreCreateEnglishForm from "./PreCreateEnglishForm";
+import ProposalEnglishForm from "./ProposalEnglishForm";
 
 type CreateEnglishModalProps = {
   isOpen: boolean;
   close: () => void;
-  openForm: () => void;
 };
 
-const CreateEnglishModal = ({
-  isOpen,
-  close,
-  openForm,
-}: CreateEnglishModalProps) => {
+const CreateEnglishModal = ({ isOpen, close }: CreateEnglishModalProps) => {
   return (
     <Modal isOpen={isOpen} close={close}>
       <div className="py-10">
-        <PreCreateEnglishForm close={close} openForm={openForm} />
+        <ProposalEnglishForm closeProposalModal={close} />
       </div>
     </Modal>
   );

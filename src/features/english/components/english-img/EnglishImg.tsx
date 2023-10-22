@@ -1,44 +1,36 @@
-import Modal from "@/components/modal/Modal";
-import { Img } from "../../types/index";
-import { useState } from "react";
-
 type EnglishImgProps = {
   isThumbnail: boolean;
   img: string;
+  SelectImg: (img: string) => void;
+  openZoomImg: () => void;
 };
 
-const EnglishImg = ({ isThumbnail, img }: EnglishImgProps) => {
-  const [isOpen, setOpen] = useState(false);
-
-  const open = () => {
-    setOpen(true);
-  };
-
-  const close = () => {
-    setOpen(false);
+const EnglishImg = ({
+  isThumbnail,
+  img,
+  SelectImg,
+  openZoomImg,
+}: EnglishImgProps) => {
+  const onClickImg = () => {
+    SelectImg(img);
+    openZoomImg();
   };
 
   return (
-    <>
+    <div>
       {isThumbnail ? (
-        <div className="text-center cursor-pointer relative" onClick={open}>
-          <p className="text-xs mb-1 absolute -top-4 right-0 left-0">
-            thumbnail
-          </p>
+        <div className="text-center cursor-pointer" onClick={onClickImg}>
           <div className="border border-accent">
-            <img src={img} alt="" className="object-cover w-28 h-20" />
+            <img src={img} alt="" className="object-cover w-48 h-40" />
           </div>
+          <p className="text-xs mt-1">thumbnail</p>
         </div>
       ) : (
-        <div className="cursor-pointer" onClick={open}>
-          <img src={img} alt="" className="object-cover w-28 h-20" />
+        <div className="cursor-pointer" onClick={onClickImg}>
+          <img src={img} alt="" className="object-cover w-48 h-40" />
         </div>
       )}
-
-      <Modal isOpen={isOpen} close={close}>
-        <img src={img} alt="" className="mt-5" />
-      </Modal>
-    </>
+    </div>
   );
 };
 

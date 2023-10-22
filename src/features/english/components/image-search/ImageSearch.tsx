@@ -14,6 +14,7 @@ const ImageSearch = ({ search, setImg }: Props) => {
   const [searchedWord, setSearchedWord] = useState(search);
   const [selectedImage, setSelectedImage] = useState("");
   const [isOpen, setOpen] = useState(false);
+  const [isOpenMask, setOpenMask] = useState(false);
 
   useEffect(() => {
     const gcse = document.createElement("script");
@@ -46,9 +47,23 @@ const ImageSearch = ({ search, setImg }: Props) => {
     };
 
     return () => {
+      console.log("Unmounted");
       s.parentNode?.removeChild(gcse);
     };
   }, []);
+
+  const openImgMask = () => {
+    setOpenMask(true);
+  };
+
+  const closeImgMask = () => {
+    const closeButton: HTMLButtonElement = document.querySelector(
+      ".gsc-results-close-btn"
+    )!;
+    closeButton.click();
+
+    setOpenMask(false);
+  };
 
   const openConfirmImage = (image: string) => {
     setSelectedImage(image);
@@ -84,6 +99,7 @@ const ImageSearch = ({ search, setImg }: Props) => {
 
     const gsearch = window.google.search.cse.element.getElement("gsearch");
 
+    openImgMask();
     gsearch.execute(value);
     setCustomEvents();
   };
@@ -154,8 +170,20 @@ const ImageSearch = ({ search, setImg }: Props) => {
       />
       <div id="googlesearch"></div>
 
+      {/* 画像検索モーダルマスク */}
+      {/* 画像検索モーダルにはマスクがないため、クローズボタンが押されずに閉じられた場合は検索値が初期化しない */}
+      {/* そのため、疑似的なマスクを作成する */}
+      <Modal
+        isOpen={isOpenMask}
+        close={closeImgMask}
+        bg="bg-transparent"
+        isMask={false}
+      >
+        <></>
+      </Modal>
+
       {/* 画像保存確認モーダル */}
-      <Modal isOpen={isOpen} close={closeConfirm}>
+      <Modal isOpen={isOpen} close={closeConfirm} zIndex="z-[70]">
         <div className="w-full px-12 py-7">
           <img
             src={selectedImage}

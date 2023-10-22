@@ -1,0 +1,33 @@
+.swiper-slide {
+  width: 250px;
+}
+
+.swiper-button-next {
+  color: #9d9d9d;
+  position: initial;
+  display: grid;
+  place-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.swiper-button-prev {
+  color: #9d9d9d;
+  position: initial;
+  display: grid;
+  place-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.swiper-button-next::after {
+  content: "";
+}
+
+.swiper-button-prev::after {
+  content: "";
+}

@@ -23,13 +23,14 @@ const config: Config = {
       },
       colors: {
         main: "#fafafa",
-        sub: "#EDEDED",
+        sub: "#f2f1f0",
         accent: "#6C63FF",
         subAccent: "#beb397",
       },
       width: {
         "102": "28rem",
         "106": "32rem",
+        "harf-screen": "50vw",
       },
       minWidth: {
         "96": "24rem",
@@ -38,6 +39,12 @@ const config: Config = {
       },
       maxHeight: {
         custom: "calc(100vh - 4rem)",
+      },
+      translate: {
+        "100vh": "100vh",
+      },
+      boxShadow: {
+        blur: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

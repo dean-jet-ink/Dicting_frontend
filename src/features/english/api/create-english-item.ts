@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { CreateEnglishItem, EnglishItem } from "../types/index";
+import { CreateEnglishItem } from "../types/index";
 import apiClient from "@/lib/api_client";
 import queryClient from "@/lib/react_query";
 
