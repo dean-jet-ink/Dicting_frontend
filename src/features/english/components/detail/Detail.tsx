@@ -1,7 +1,6 @@
-import { Pen, PlayCircle, Volume2 } from "lucide-react";
+import { Pen, Volume2 } from "lucide-react";
 
 import { EnglishItem, EnglishItemForm } from "../../types";
-import Border from "@/components/border/border";
 import Button from "@/components/button/Button";
 import { useFieldArray, useForm } from "react-hook-form";
 import MeaningForm from "./form/meaning/MeaningForm";
@@ -13,20 +12,23 @@ import ProficiencyIcon from "../proficiency/Proficiency";
 import Switch from "@/components/switch/Switch";
 import ExampleFormList from "./form/example/ExampleFormList";
 import useUpdateEnglishItem from "../../api/update-english-item";
-import { UseMutateFunction } from "react-query";
+import EnglishVideo from "../english-video/EnglishVideo";
+import Exp from "../exp/Exp";
+import EnglishItemContainer from "../../../../components/container/EnglishItemContainer";
+import answerResolver from "../../validation/english-item-schema";
 
 type DetailProps = {
   englishItem: EnglishItem;
   isCreate?: boolean;
   closeCreateModal?: () => void;
-  getEnglishItem?: UseMutateFunction<EnglishItem, unknown, string, unknown>;
+  refetch?: () => void;
 };
 
 const Detail = ({
   englishItem,
   isCreate = false,
   closeCreateModal,
-  getEnglishItem,
+  refetch,
 }: DetailProps) => {
   const [isEdit, setIsEdit] = useState(false);
 
@@ -40,16 +42,19 @@ const Detail = ({
     }
   }, []);
 
-  const { content, translations, en_explanation, proficiency, imgs } =
+  const { content, translations, en_explanation, proficiency, exp, imgs } =
     englishItem;
 
   const { register, handleSubmit, control, formState, getValues, setValue } =
     useForm<EnglishItemForm>({
+      mode: "all",
+      criteriaMode: "all",
       defaultValues: {
         ...englishItem,
         // useFieldArrayで使用できる型に変換
         translations: translations.map((translation) => ({ translation })),
       },
+      resolver: answerResolver,
     });
 
   const translationsFields = useFieldArray({
@@ -74,7 +79,7 @@ const Detail = ({
       type: "success",
       title: "Create english item",
       message: `【${content}】を作成しました`,
-      duration: 3000,
+      duration: 5000,
     });
 
     close();
@@ -109,8 +114,7 @@ const Detail = ({
       duration: 3000,
     });
 
-    getEnglishItem?.(content);
-
+    refetch?.();
     setIsEdit(false);
   };
 
@@ -136,26 +140,22 @@ const Detail = ({
   return (
     <div>
       {!isCreate && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2 mb-10">
           <Switch
             id="editSwitch"
             flag={isEdit}
             toggleFlag={toggleEdit}
             icon={<Pen className="w-4" />}
           />
+          <div className="flex items-center gap-8">
+            <ProficiencyIcon proficiency={proficiency} />
+            <Exp proficiency={proficiency} exp={exp} />
+          </div>
         </div>
       )}
-      <div className="flex items-center justify-center gap-4 mb-8 relative">
-        <h2 className="text-2xl">{content}</h2>
-        <Volume2 className="cursor-pointer" />
-        {!isCreate && (
-          <div className="absolute right-2">
-            <ProficiencyIcon proficiency={proficiency} />
-          </div>
-        )}
-      </div>
+      <h2 className="text-lg md:text-2xl mb-20 w-fit m-auto">{content}</h2>
 
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-24">
         <div>
           <MeaningForm
             isEdit={isEdit}
@@ -187,17 +187,9 @@ const Detail = ({
           />
         </div>
         {!isEdit && (
-          <div>
-            <div>
-              <h3 className="text-subAccent">Video</h3>
-              <Border />
-            </div>
-            <div>
-              <div className="w-80 h-60 m-auto border border-gray-400 flex justify-center items-center">
-                <PlayCircle />
-              </div>
-            </div>
-          </div>
+          <EnglishItemContainer title="Video">
+            <EnglishVideo content={content} />
+          </EnglishItemContainer>
         )}
       </div>
 

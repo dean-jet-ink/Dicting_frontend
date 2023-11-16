@@ -43,7 +43,7 @@ const Modal = ({
         onClick={close}
       ></div>
       <div
-        className={`max-h-custom max-w-3xl ${bg} p-6 rounded-sm absolute z-50 overflow-x-hidden overscroll-contain`}
+        className={`max-h-custom w-screen sm:w-auto ${bg} p-6 sm:p-14 rounded-sm absolute z-50 overflow-x-hidden overscroll-contain`}
       >
         {bg === "bg-sub" && (
           <div className="w-full">

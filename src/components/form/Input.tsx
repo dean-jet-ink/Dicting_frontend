@@ -1,6 +1,7 @@
 import { ComponentProps, forwardRef } from "react";
 import { FieldError, UseFormRegister } from "react-hook-form";
 import Loading from "../loading/Loading";
+import FormError from "./FormError";
 
 export type InputProps = {
   error?: FieldError;
@@ -19,19 +20,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         >
           {isLoading ? (
             <div className="h-8">
-              <Loading bg="bg-gray-600" variant="small" />
+              <Loading bg="bg-gray-600" />
             </div>
           ) : (
             <input
-              className="appearance-none bg-transparent border-none w-full py-1 px-2 focus:outline-none cursor-text"
+              className="appearance-none bg-transparent border-none w-full py-1 px-2 focus:outline-none cursor-text text-xs md:text-base"
               {...props}
               ref={ref}
             />
           )}
         </div>
-        {error && (
-          <div className="text-rose-700 mt-1 text-sm">{error.message}</div>
-        )}
+        <FormError error={error} />
       </div>
     );
   }

@@ -16,13 +16,15 @@ const CreateEnglishForm = ({
   return (
     isOpen && (
       <Modal isOpen={isOpen} close={close} isMask={false}>
-        {proposal && (
-          <Detail
-            englishItem={proposal as EnglishItem}
-            isCreate={true}
-            closeCreateModal={close}
-          />
-        )}
+        <div className="sm:w-[80vw] lg:w-[980px]">
+          {proposal && (
+            <Detail
+              englishItem={proposal as EnglishItem}
+              isCreate={true}
+              closeCreateModal={close}
+            />
+          )}
+        </div>
       </Modal>
     )
   );

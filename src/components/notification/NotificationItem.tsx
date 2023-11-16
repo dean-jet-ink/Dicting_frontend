@@ -36,10 +36,10 @@ const NotificationItem = ({
   return (
     <div
       id={id}
-      className={`${bgColor} py-2 px-5 m-auto w-96  text-white rounded-md transition-all duration-300 animate-slide-in-top`}
+      className={`${bgColor} py-3 px-5 w-full text-white rounded-sm transition-all duration-300 animate-slide-in-top`}
       onClick={dismiss}
     >
-      <h4 className="mb-1 font-bold">{title}</h4>
+      <h4 className="mb-2 font-bold">{title}</h4>
       <p>{message}</p>
     </div>
   );

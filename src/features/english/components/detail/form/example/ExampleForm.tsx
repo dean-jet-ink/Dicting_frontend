@@ -6,7 +6,6 @@ import {
 } from "react-hook-form";
 import { EnglishItemForm, Example } from "@/features/english/types";
 import Input from "@/components/form/Input";
-import { useState } from "react";
 import AIIcon from "../../../ai/AIIcon";
 import useProposalExample from "@/features/english/api/proposal-example";
 import DeleteIcon from "@/components/deleteIcon/DeleteIcon";
@@ -32,8 +31,6 @@ const ExampleForm = ({
   setValue,
   remove,
 }: ExampleFormProps) => {
-  const [examples, setExamples] = useState({ example, translation });
-
   const onSuccess = (example: Example) => {
     setValue(`examples.${index}.example`, example.example);
     setValue(`examples.${index}.translation`, example.translation);

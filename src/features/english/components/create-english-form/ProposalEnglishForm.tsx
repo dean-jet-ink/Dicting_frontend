@@ -38,14 +38,14 @@ const ProposalEnglishForm = ({
   };
 
   return (
-    <div>
+    <div className="sm:w-106">
       <div className="text-center">
         <label htmlFor="create-english" className="block mb-8">
           登録する英語を入力してください
         </label>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-8 w-96">
+        <div className="mb-8 w-full">
           <Input
             id="create-english"
             placeholder="英単語、フレーズ、文 etc"

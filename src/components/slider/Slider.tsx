@@ -32,7 +32,7 @@ const Slider = ({ contents }: SliderProps) => {
           return <SwiperSlide key={index}>{content}</SwiperSlide>;
         })}
       </Swiper>
-      <div className="flex items-center justify-end gap-3 mt-12">
+      <div className="flex items-center justify-start gap-2 mt-10">
         <div className="border border-gray-400 rounded-sm swiper-button-prev">
           <ChevronLeft />
         </div>

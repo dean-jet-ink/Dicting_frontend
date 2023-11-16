@@ -29,7 +29,7 @@ apiClient.interceptors.response.use(
       type: "error",
       title: "Error " + statusCode,
       message: message,
-      duration: 5000,
+      duration: 500000,
     });
 
     return Promise.reject(error);

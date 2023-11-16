@@ -8,13 +8,13 @@ import Button from "@/components/button/Button";
 import { useState } from "react";
 import Modal from "@/components/modal/Modal";
 import { useDeleteEnglishItem } from "../../api/delete-english-item";
-
-export type CardProps = {
-  openDetail: (content: string) => void;
-} & EnglishItemInfo;
+import Img from "@/components/image/Img";
+import { useGetEnglishItem } from "../../api/get-english-item";
+import Loading from "@/components/loading/Loading";
+import CardContent from "../card-content/CardContent";
+import SideMenu from "@/components/sidemenu/SideMenu";
 
 const Card = ({
-  openDetail,
   id,
   content,
   translations,
@@ -22,11 +22,27 @@ const Card = ({
   img,
   proficiency,
   exp,
-}: CardProps) => {
-  const [isOpen, setOpen] = useState(false);
+}: EnglishItemInfo) => {
+  // コンテンツモーダルに関する処理
+  const [isOpenContent, setOpenContent] = useState(false);
+
+  const { data, isFetching, refetch } = useGetEnglishItem({ id });
+
+  const openContent = () => {
+    refetch();
+    document.body.style["overflow"] = "hidden";
+    setOpenContent(true);
+  };
+
+  const closeContent = () => {
+    document.body.style["overflow"] = "auto";
+    setOpenContent(false);
+  };
+
+  const [isOpenDelete, setOpenDelete] = useState(false);
 
   const onSuccess = () => {
-    setOpen(false);
+    setOpenDelete(false);
   };
 
   const { submit, isLoading } = useDeleteEnglishItem({ onSuccess });
@@ -36,16 +52,16 @@ const Card = ({
   };
 
   const openDeleteModal = () => {
-    setOpen(true);
+    setOpenDelete(true);
   };
 
   const closeDeleteModal = () => {
-    setOpen(false);
+    setOpenDelete(false);
   };
 
   const [isHover, setHover] = useState(false);
-  const imgStyle = `w-32 h-32 object-cover rounded-sm shadow-lg transition-all duration-300`;
-  const unhoveredImgStyle = `${imgStyle} grayscale-[70%]`;
+  const imgStyle = `w-24 h-24 object-cover rounded-sm transition-all duration-300`;
+  const unhoveredImgStyle = `${imgStyle} grayscale-[80%]`;
 
   const onMouseEnter = () => {
     setHover(true);
@@ -58,45 +74,62 @@ const Card = ({
   return (
     <div>
       <div
-        className="bg-sub rounded-sm shadow-md hover:shadow-lg hover:scale-105 cursor-pointer transition-all duration-200 relative w-[352px] h-56"
+        className="bg-sub rounded-sm shadow-md hover:shadow-lg hover:scale-105 cursor-pointer transition-all duration-200 relative w-full sm:w-[60%] md:w-[340px] lg:w-[300px] xl:w-[392px] m-auto h-54"
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onTouchStart={onMouseEnter}
         onTouchEnd={onMouseLeave}
       >
-        <div className="absolute top-4 right-5">
+        <div className="absolute top-6 right-6">
           <DeleteIcon remove={openDeleteModal} />
         </div>
-        <div
-          className="pt-12 pl-24 pr-3 w-full h-full"
-          onClick={() => openDetail(content)}
-        >
-          <div className="absolute top-[30%] -left-[16%]">
-            {img === "" ? (
-              <Image
-                src={noImage}
-                alt=""
+        <div className="pt-12 pb-4 px-6 w-full h-full" onClick={openContent}>
+          <div className="w-full mt-1">
+            <h3 className="text-lg mb-4 whitespace-nowrap overflow-x-hidden text-ellipsis">
+              {content}
+            </h3>
+            <p className="text-xs whitespace-nowrap overflow-x-hidden text-ellipsis">
+              {translations.join("　")}
+            </p>
+          </div>
+          <div className="flex items-center justify-between mt-8">
+            <div>
+              <Img
+                defaultImg={noImage}
+                img={img}
                 className={isHover ? imgStyle : unhoveredImgStyle}
               />
-            ) : (
-              <img
-                src={img}
-                alt=""
-                className={isHover ? imgStyle : unhoveredImgStyle}
-              />
-            )}
-          </div>
-          <div className="w-full break-words">
-            <h3 className="text-md mb-4 font-bold">{content}</h3>
-            <p className="text-xs">{translations.join("、 ")}</p>
-          </div>
-          <div className="flex items-end justify-end gap-8 mt-8">
-            <ProficiencyIcon proficiency={proficiency} />
-            <Exp exp={exp} proficiency={proficiency} />
+            </div>
+            <div className="flex items-center justify-center gap-6">
+              <ProficiencyIcon proficiency={proficiency} />
+              <Exp exp={exp} proficiency={proficiency} />
+            </div>
           </div>
         </div>
       </div>
-      <Modal isOpen={isOpen} close={closeDeleteModal} zIndex="z-[1000]">
+
+      {/* コンテンツモーダル */}
+      <SideMenu isOpen={isOpenContent} close={closeContent}>
+        {data && isOpenContent ? (
+          isFetching ? (
+            <div className="w-full h-full flex items-center justify-center">
+              <Loading variant="mid" bg="bg-gray-600" />
+            </div>
+          ) : (
+            <CardContent
+              englishItem={data}
+              refetch={() => {
+                refetch();
+              }}
+            />
+          )
+        ) : (
+          <></>
+        )}
+      </SideMenu>
+
+      {/* 削除モーダル */}
+      <Modal isOpen={isOpenDelete} close={closeDeleteModal} zIndex="z-[1000]">
         <div className="text-center mt-4 mb-10 w-96">
           <span className="text-red-600">{content}</span>を削除しますか？
         </div>

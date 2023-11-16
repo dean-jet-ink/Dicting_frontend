@@ -34,7 +34,7 @@ const SignupForm = () => {
           {...register("name", { required: "この項目は必須です" })}
           error={formState.errors["name"]}
         />
-        <Button size="lg" isLoading={isLoading}>
+        <Button type="submit" size="lg" isLoading={isLoading}>
           サインアップ
         </Button>
       </div>

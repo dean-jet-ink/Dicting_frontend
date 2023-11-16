@@ -17,9 +17,25 @@ const CreateEnglishButton = () => {
 
   return (
     <div>
-      <Button type="button" onClick={onClickOpenModal} icon={<Plus />}>
-        Create
-      </Button>
+      <div className="hidden md:block">
+        <Button
+          type="button"
+          onClick={onClickOpenModal}
+          icon={<Plus size={16} />}
+        >
+          Create
+        </Button>
+      </div>
+      <div className="md:hidden">
+        <Button
+          type="button"
+          size="sm"
+          onClick={onClickOpenModal}
+          icon={<Plus size={16} />}
+        >
+          Create
+        </Button>
+      </div>
       <CreateEnglishModal isOpen={isOpenModal} close={onClickCloseModal} />
     </div>
   );

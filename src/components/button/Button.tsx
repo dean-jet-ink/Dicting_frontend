@@ -16,7 +16,7 @@ const variants = {
 
 export type ButtonProps = {
   variant?: keyof typeof variants;
-  size?: "lg" | "md";
+  size?: "lg" | "md" | "sm";
   children: ReactNode;
   isLoading?: boolean;
   icon?: ReactElement;
@@ -29,17 +29,27 @@ const Button = ({
   children,
   isLoading,
   icon,
+  disabled,
   ...props
 }: ButtonProps) => {
   const { color, loading, hover } = variants[variant];
-  const width = size == "lg" ? "w-72" : "w-32";
+  const width =
+    size === "lg" ? "w-72" : size === "md" ? "w-32" : "w-24 text-xs h-8";
 
-  const defaultButtonStyle = `${color} ${hover} text-white font-bold h-10 ${width} rounded-sm transition-all duration-200 text-center shadow-md`;
-  const isLoadingButtonStyle = `${loading} text-white font-bold h-10 ${width} rounded-sm text-center cursor-default shadow-md`;
-  const buttonStyle = isLoading ? isLoadingButtonStyle : defaultButtonStyle;
+  const baseStyle = `text-white text-sm font-bold h-10 ${width} rounded-sm transition-all duration-200 text-center shadow-md`;
+  const defaultStyle = `${baseStyle} ${color} ${hover}`;
+  const isLoadingStyle = `${baseStyle} ${loading}`;
+  const disabledStyle = `${baseStyle} ${loading} pointer-events-none`;
 
   return (
-    <button className={buttonStyle} {...props}>
+    <button
+      className={
+        isLoading ? isLoadingStyle : disabled ? disabledStyle : defaultStyle
+      }
+      type={type}
+      disabled={disabled}
+      {...props}
+    >
       {isLoading ? (
         <Loading />
       ) : icon ? (

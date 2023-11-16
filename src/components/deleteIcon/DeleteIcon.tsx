@@ -1,4 +1,4 @@
-import { Trash } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 type DeleteIconProps = {
   remove: () => void;
@@ -6,7 +6,7 @@ type DeleteIconProps = {
 
 const DeleteIcon = ({ remove }: DeleteIconProps) => {
   return (
-    <Trash
+    <Trash2
       size={22}
       className="cursor-pointer text-gray-500"
       onClick={remove}

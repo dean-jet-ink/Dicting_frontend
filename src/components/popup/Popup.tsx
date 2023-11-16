@@ -2,10 +2,11 @@ import { ReactNode, useEffect, useState } from "react";
 
 export type PopupProps = {
   content: ReactNode;
-  isHover: boolean;
+  isVisible: boolean;
+  bg?: "bg-subAccent" | "bg-white";
 };
 
-const Popup = ({ content, isHover }: PopupProps) => {
+const Popup = ({ content, isVisible, bg = "bg-subAccent" }: PopupProps) => {
   const [isOpen, setOpen] = useState(false);
   const [timer, setTimer] = useState<NodeJS.Timeout | undefined>();
 
@@ -24,17 +25,16 @@ const Popup = ({ content, isHover }: PopupProps) => {
   };
 
   useEffect(() => {
-    if (isHover) {
+    if (isVisible) {
       onMouseEnterHandler();
     } else {
       onMouseLeaveHandler();
     }
-  }, [isHover]);
+  }, [isVisible]);
 
-  const baseAnnotationStyle =
-    "relative bg-subAccent px-2 py-1 rounded-sm transition-all duration-300";
-  const invisible = `${baseAnnotationStyle} opacity-0 pointer-events-none`;
-  const visible = `${baseAnnotationStyle} opacity-100`;
+  const basePopupStyle = `${bg} px-2 py-1 rounded-sm transition-all duration-300`;
+  const invisible = `${basePopupStyle} opacity-0 pointer-events-none`;
+  const visible = `${basePopupStyle} opacity-100`;
 
   return <div className={isOpen ? visible : invisible}>{content}</div>;
 };

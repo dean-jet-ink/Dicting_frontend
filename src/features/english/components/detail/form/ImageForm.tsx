@@ -4,7 +4,7 @@ import { UseFieldArrayReturn } from "react-hook-form";
 import { EnglishItemForm, Img } from "@/features/english/types";
 import ImageSearch from "../../image-search/ImageSearch";
 import EnglishImg from "../../english-img/EnglishImg";
-import EnglishItemFormContainer from "./EnglishItemFormContainer";
+import EnglishItemContainer from "../../../../../components/container/EnglishItemContainer";
 import { Trash } from "lucide-react";
 import Slider from "@/components/slider/Slider";
 import Modal from "@/components/modal/Modal";
@@ -34,8 +34,6 @@ const ImageForm = ({
 
   const [selectedImg, setSelectedImg] = useState("");
 
-  console.log(fields);
-
   const SelectImg = (img: string) => {
     setSelectedImg(img);
   };
@@ -61,7 +59,7 @@ const ImageForm = ({
 
   if (isEdit) {
     return (
-      <EnglishItemFormContainer title="Image">
+      <EnglishItemContainer title="Image">
         <ImageSearch search={content} setImg={appendImg} />
 
         <div className="flex gap-10 items-end justify-start flex-wrap mt-8">
@@ -89,15 +87,15 @@ const ImageForm = ({
 
         {isOpen && (
           <Modal isOpen={isOpen} close={closeModal} bg="bg-transparent">
-            <img src={selectedImg} alt="" className="mt-5" />
+            <img src={selectedImg} alt="" className="mt-5 m-auto" />
           </Modal>
         )}
-      </EnglishItemFormContainer>
+      </EnglishItemContainer>
     );
   }
 
   return (
-    <EnglishItemFormContainer title="Image">
+    <EnglishItemContainer title="Image">
       {imgs && imgs.length !== 0 ? (
         <Slider
           contents={imgs.map(({ url, is_thumbnail }, index) => (
@@ -117,7 +115,7 @@ const ImageForm = ({
       <Modal isOpen={isOpen} close={closeModal} bg="bg-transparent">
         <img src={selectedImg} alt="" className="mt-5" />
       </Modal>
-    </EnglishItemFormContainer>
+    </EnglishItemContainer>
   );
 };
 

@@ -22,8 +22,8 @@ const SideMenu = ({
   const closeStyle = `${baseStyle} -z-50 opacity-0 pointer-events-none`;
 
   const baseContentStyle = `h-screen ${
-    size === "md" ? "lg:w-harf-screen md:w-screen" : "w-80"
-  } p-6 pb-20 bg-main shadow-blur absolute z-50 top-0 ${
+    size === "md" ? "w-screen lg:w-[70vw] xl:w-harf-screen " : "w-80"
+  } p-10 pb-20 bg-main shadow-blur absolute z-50 top-0 ${
     side === "right" ? "right-0" : "left-0 rounded-md"
   } transition-all duration-300 overflow-x-hidden overflow-y-auto`;
   const openContentStyle = `${baseContentStyle} opacity-100`;

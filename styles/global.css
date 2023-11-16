@@ -12,7 +12,7 @@ body {
 }
 
 body * {
-  @apply tracking-widest;
+  @apply tracking-widest leading-6;
 }
 
 ::-webkit-scrollbar {
@@ -81,4 +81,9 @@ body * {
 
 .swiper-button-prev::after {
   content: "" !important;
+}
+
+/* youglish */
+#yg-widget {
+  @apply !bg-main;
 }

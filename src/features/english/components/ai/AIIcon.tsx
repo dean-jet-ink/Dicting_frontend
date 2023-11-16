@@ -40,7 +40,7 @@ const AIIcon = ({ submit, isLoading }: AIIconProps) => {
       />
       <div className="absolute -top-6 -left-8">
         <Popup
-          isHover={isHover}
+          isVisible={isHover}
           content={<p className="w-max text-xs text-gray-100">AI自動生成</p>}
         />
       </div>

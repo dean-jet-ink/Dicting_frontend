@@ -1,6 +1,6 @@
 const variants = {
   xs: { width: "w-1", height: "h-1", space: "space-x-1" },
-  small: { width: "w-2", height: "h-2", space: "space-x-3" },
+  sm: { width: "w-2", height: "h-2", space: "space-x-3" },
   mid: { width: "w-4", height: "h-4", space: "space-x-6" },
 };
 
@@ -9,7 +9,7 @@ export type LoadingProps = {
   variant?: keyof typeof variants;
 };
 
-const Loading = ({ bg = "bg-white", variant = "small" }: LoadingProps) => {
+const Loading = ({ bg = "bg-white", variant = "sm" }: LoadingProps) => {
   const { width, height, space } = variants[variant];
 
   return (

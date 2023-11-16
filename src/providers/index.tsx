@@ -13,7 +13,9 @@ const AppProvider = ({ children }: AppProviderProps) => {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
       <NotificationList />
-      {children}
+
+      {/* notificationを最前面にひょうじするため、ページコンテントにrelative、z-index: 0を指定 */}
+      <div className="relative z-0">{children}</div>
     </QueryClientProvider>
   );
 };

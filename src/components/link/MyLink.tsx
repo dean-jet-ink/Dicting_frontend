@@ -10,7 +10,7 @@ const MyLink = ({ label, href }: MyLinkProps) => {
   return (
     <Link
       href={href}
-      className="flex justify-center items-center font-bold text-center hover:text-subAccent mr-2"
+      className="flex justify-center items-center font-bold text-center hover:text-accent mr-2"
     >
       {label}
       <ChevronRight />

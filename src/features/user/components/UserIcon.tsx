@@ -2,12 +2,13 @@ import Image from "next/image";
 import { useGetUser } from "../api/get_user";
 import user from "../../../../public/user.svg";
 import Loading from "@/components/loading/Loading";
+import Img from "@/components/image/Img";
 
-type UserMenuProps = {
+type UserIconProps = {
   openSideMenu?: () => void;
 };
 
-const UserMenu = ({ openSideMenu }: UserMenuProps) => {
+const UserIcon = ({ openSideMenu }: UserIconProps) => {
   const { data, isLoading } = useGetUser({});
 
   if (isLoading) {
@@ -16,18 +17,16 @@ const UserMenu = ({ openSideMenu }: UserMenuProps) => {
 
   return (
     <div
-      className="rounded-full border border-gray-600 w-10 cursor-pointer"
+      className="rounded-full border border-gray-300 w-8 h-8 md:w-12 md:h-12 cursor-pointer"
       onClick={openSideMenu}
     >
-      {data && (
-        <Image
-          src={data.image ? data.image : user}
-          alt=""
-          className="rounded-full object-contain"
-        />
-      )}
+      <Img
+        img={data.image}
+        defaultImg={user}
+        className="rounded-full w-8 h-8 md:w-12 md:h-12 object-cover"
+      />
     </div>
   );
 };
 
-export default UserMenu;
+export default UserIcon;

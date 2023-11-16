@@ -23,7 +23,7 @@ const ImageSearch = ({ search, setImg }: Props) => {
     const s = document.getElementsByTagName("script")[0];
     s.parentNode?.insertBefore(gcse, s);
 
-    var renderSearchForms = function () {
+    const renderSearchForms = function () {
       if (document.readyState === "complete") {
         window.google.search.cse.element.render({
           div: "googlesearch",
@@ -47,7 +47,6 @@ const ImageSearch = ({ search, setImg }: Props) => {
     };
 
     return () => {
-      console.log("Unmounted");
       s.parentNode?.removeChild(gcse);
     };
   }, []);
@@ -119,7 +118,7 @@ const ImageSearch = ({ search, setImg }: Props) => {
     tabs[1].click();
 
     // 表示された画像一覧での各画像に、画像選択、確認モーダルオープンのイベント追加
-    setTimeout(setSelectedImgEvent, 1000);
+    setSelectedImgEvent();
 
     // ページネーションボタンのクリックイベントに上記の画像保存イベントを仕込む
     setPagenationEvent();
@@ -130,15 +129,22 @@ const ImageSearch = ({ search, setImg }: Props) => {
     const popups: NodeListOf<HTMLDivElement> = document.querySelectorAll(
       ".gs-result.gs-imageResult.gs-imageResult-popup"
     );
-    popups.forEach((popup) => {
-      popup.style["pointerEvents"] = "none";
-    });
 
     // 一番外側の要素にポインターとイベントを付与
     const popupContainers: NodeListOf<HTMLDivElement> =
       document.querySelectorAll(
         ".gsc-imageResult.gsc-imageResult-popup.gsc-result"
       );
+
+    if (popups.length === 0 || popupContainers.length === 0) {
+      setTimeout(setSelectedImgEvent, 500);
+      return;
+    }
+
+    popups.forEach((popup) => {
+      popup.style["pointerEvents"] = "none";
+    });
+
     popupContainers.forEach((container) => {
       container.style["cursor"] = "pointer";
 
@@ -152,6 +158,12 @@ const ImageSearch = ({ search, setImg }: Props) => {
 
   const setPagenationEvent = () => {
     const pagenations = document.querySelectorAll(".gsc-cursor-page");
+
+    if (pagenations.length === 0) {
+      setTimeout(setPagenationEvent, 500);
+      return;
+    }
+
     pagenations.forEach((pagenation) => {
       pagenation.addEventListener("click", () => {
         setTimeout(setSelectedImgEvent, 1000);
@@ -188,7 +200,7 @@ const ImageSearch = ({ search, setImg }: Props) => {
           <img
             src={selectedImage}
             alt=""
-            className="object-fill mb-5 border-2 border-gray-200 rounded-sm"
+            className="object-fill mb-5 border-2 border-gray-200 rounded-sm m-auto"
           />
           <div className="w-fit m-auto">
             <Button onClick={appendImage}>画像追加</Button>
