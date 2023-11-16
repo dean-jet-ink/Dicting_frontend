@@ -29,15 +29,15 @@ const ProficiencyIcon = ({ proficiency }: ProficiencyProps) => {
       className="relative"
     >
       {proficiency === "Learning" ? (
-        <Sprout size={48} strokeWidth={1.3} className="text-gray-500" />
+        <Sprout size={32} strokeWidth={1.3} className="text-gray-500" />
       ) : proficiency === "Understand" ? (
-        <Lightbulb size={48} strokeWidth={1.3} className="text-text-gray-500" />
+        <Lightbulb size={32} strokeWidth={1.3} className="text-text-gray-500" />
       ) : (
-        <Award size={48} strokeWidth={1.3} className="text-gray-500" />
+        <Award size={32} strokeWidth={1.3} className="text-gray-500" />
       )}
-      <div className="absolute top-12 -left-3">
+      <div className="absolute -top-6 -left-[1.4rem]">
         <Popup
-          isHover={isHover}
+          isVisible={isHover}
           content={<p className="text-xs text-gray-100">{proficiency}</p>}
         />
       </div>

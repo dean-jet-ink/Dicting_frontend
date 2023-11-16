@@ -36,8 +36,9 @@ const Accordion = ({ overview, detail }: AccordionProps) => {
       </div>
       <div
         style={{
-          height: isOpen ? `${height}px` : "0px",
+          height: isOpen ? `${height}px` : "0",
           opacity: isOpen ? 100 : 0,
+          marginBottom: isOpen ? "20px" : "0",
         }}
         className="transition-all duration-200"
       >

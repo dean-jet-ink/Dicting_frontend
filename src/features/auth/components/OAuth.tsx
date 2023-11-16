@@ -15,11 +15,6 @@ const OAuth = ({ isLogin }: OAuthProps) => {
       href: "google",
       icon: googleIcon,
     },
-    {
-      label: "Line",
-      href: "line",
-      icon: lineIcon,
-    },
   ];
 
   return (

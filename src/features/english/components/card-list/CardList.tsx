@@ -1,51 +1,54 @@
 import Image from "next/image";
 
 import noItems from "@/../public/noItems.svg";
-import { useGetEnglishItems } from "../../api/get-english-items";
+import empty from "@/../public/empty.svg";
 import Loading from "@/components/loading/Loading";
 import Card from "../card/Card";
-import SideMenu from "@/components/sidemenu/SideMenu";
-import Detail from "../detail/Detail";
-import { useState } from "react";
-import { useGetEnglishItem } from "../../api/get-english-item";
+import useFilteredEnglishItemsStore from "@/store/filtered-english-items/filteredEnglishItems";
+import useSearch from "@/store/search/search";
+import queryClient from "@/lib/react_query";
+import { EnglishItems } from "../../types";
+import useGetRequiredExp from "../../api/get-required-exp";
+import { useProficiency } from "@/store/proficiency/proficiency";
 
 const CardList = () => {
-  const { data: items, isLoading: isLoadingItems } = useGetEnglishItems({});
+  // CardのExpにて使用する必要経験値の取得
+  useGetRequiredExp();
 
-  const {
-    submit,
-    data: item,
-    isLoading: isLoadingItem,
-  } = useGetEnglishItem({});
-  const [isOpen, setOpen] = useState(false);
+  const { filteredEnglishItems: items } = useFilteredEnglishItemsStore();
 
-  const openDetail = (content: string) => {
-    submit(content);
+  const englishItems: EnglishItems | undefined = queryClient.getQueryData([
+    "englishItems",
+  ]);
 
-    document.body.style["overflow"] = "hidden";
+  const { searchedWord } = useSearch();
 
-    setOpen(true);
-  };
+  const { proficiency } = useProficiency();
 
-  const closeDetail = () => {
-    setOpen(false);
-
-    document.body.style["overflow"] = "auto";
-  };
-
-  if (isLoadingItems) {
+  if (!englishItems) {
     return <Loading variant="mid" />;
   }
 
-  if (items && items.english_items.length === 0) {
+  if (englishItems && englishItems.english_items.length === 0) {
     return (
-      <div className="h-screen flex justify-center items-center -mt-14">
+      <div className="h-screen flex justify-center items-center">
         <div className="flex justify-center items-center gap-14">
           <div className="flex flex-col gap-2">
             <p>単語やフレーズを登録して</p>
             <p>あなただけの辞書を完成させましょう</p>
           </div>
-          <Image src={noItems} width={180} alt="no items" />
+          <Image src={noItems} alt="no items" className="w-[30%]  lg:w-[20%]" />
+        </div>
+      </div>
+    );
+  }
+
+  if ((searchedWord !== "" || proficiency != "All") && items.length === 0) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <div className="flex justify-center items-center gap-4 md:gap-14">
+          <p>該当するコンテンツがありません</p>
+          <Image src={empty} alt="empty" className="w-[30%] lg:w-[20%]" />
         </div>
       </div>
     );
@@ -53,22 +56,12 @@ const CardList = () => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-start gap-x-20 gap-y-11 mt-32">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-11 my-32 m-auto justify-center">
         {items &&
-          items.english_items.map((item) => {
-            return <Card key={item.id} openDetail={openDetail} {...item} />;
+          items.map((item) => {
+            return <Card key={item.id} {...item} />;
           })}
       </div>
-
-      <SideMenu isOpen={isOpen} close={closeDetail}>
-        {!isLoadingItem && item ? (
-          <Detail englishItem={item} getEnglishItem={submit} />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <Loading variant="mid" bg="bg-gray-600" />
-          </div>
-        )}
-      </SideMenu>
     </>
   );
 };

@@ -28,7 +28,7 @@ const TranslationFormList = ({
       <div className="text-white bg-gray-600 w-6 h-6 rounded-sm flex flex-col items-center justify-center">
         <p>あ</p>
       </div>
-      <div className="flex items-center justify-start flex-wrap gap-7 w-full">
+      <div className="sm:grid grid-cols-2 items-center justify-start flex-wrap gap-7 w-full mb-8">
         {fields.map(({ id, translation }, index) => (
           <TranslationForm
             key={`${id}:${index}:${translation}`}

@@ -5,7 +5,7 @@ import {
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import EnglishItemFormContainer from "../EnglishItemFormContainer";
+import EnglishItemContainer from "../../../../../../components/container/EnglishItemContainer";
 import { EnglishItemForm } from "@/features/english/types";
 import Accordion from "@/components/accordion/Accordion";
 import { useState } from "react";
@@ -34,7 +34,7 @@ const ExampleFormList = ({
 
   if (isEdit) {
     return (
-      <EnglishItemFormContainer title="Example">
+      <EnglishItemContainer title="Example">
         <div className="flex flex-col gap-8">
           {fields.map(({ id, example, translation }, index) => {
             return (
@@ -58,20 +58,20 @@ const ExampleFormList = ({
             className="cursor-pointer -mt-4"
           />
         </div>
-      </EnglishItemFormContainer>
+      </EnglishItemContainer>
     );
   }
 
   return (
-    <EnglishItemFormContainer title="Example">
-      <div className="flex flex-col gap-10">
+    <EnglishItemContainer title="Example">
+      <div className="flex flex-col gap-4">
         {examples.map(({ example, translation }, index) => {
           return (
             <Accordion key={index} overview={example} detail={translation} />
           );
         })}
       </div>
-    </EnglishItemFormContainer>
+    </EnglishItemContainer>
   );
 };
 

@@ -27,7 +27,7 @@ const Template: StoryFn<PopupProps> = ({ content }) => {
       >
         Popup
       </div>
-      <Popup content={content} isHover={isHover} />
+      <Popup content={content} isVisible={isHover} />
     </div>
   );
 };

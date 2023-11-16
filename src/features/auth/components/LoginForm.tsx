@@ -27,7 +27,7 @@ const LoginForm = () => {
           {...register("password", { required: "この項目は必須です" })}
           error={formState.errors["password"]}
         />
-        <Button size="lg" isLoading={isLoading}>
+        <Button type="submit" size="lg" isLoading={isLoading}>
           ログイン
         </Button>
       </div>

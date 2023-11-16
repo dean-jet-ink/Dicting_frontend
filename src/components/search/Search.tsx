@@ -5,7 +5,7 @@ import { FieldError, UseFormRegister } from "react-hook-form";
 export type SearchProps = { error?: FieldError } & ComponentProps<"input"> &
   Omit<
     Partial<ReturnType<UseFormRegister<Record<string, unknown>>>>,
-    "onChange"
+    "onChange" | "onBlur"
   >;
 
 const Search = forwardRef<HTMLInputElement, SearchProps>(

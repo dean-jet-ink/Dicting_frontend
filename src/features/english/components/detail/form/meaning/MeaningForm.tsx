@@ -1,15 +1,13 @@
 import {
   FormState,
   UseFieldArrayReturn,
-  UseFormGetValues,
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import { EnglishItemForm, Translation } from "@/features/english/types";
-import EnglishItemFormContainer from "../EnglishItemFormContainer";
+import { EnglishItemForm } from "@/features/english/types";
+import EnglishItemContainer from "../../../../../../components/container/EnglishItemContainer";
 import TranslationFormList from "./TranslationFormList";
 import ExplanationForm from "./ExplanationForm";
-import { useEffect, useState } from "react";
 
 type MeaningFormProps = {
   isEdit: boolean;
@@ -34,7 +32,7 @@ const MeaningForm = ({
 }: MeaningFormProps) => {
   if (isEdit) {
     return (
-      <EnglishItemFormContainer title="Meaning">
+      <EnglishItemContainer title="Meaning">
         <div className="flex flex-col gap-5">
           <TranslationFormList
             content={content}
@@ -50,13 +48,13 @@ const MeaningForm = ({
             setValue={setValue}
           />
         </div>
-      </EnglishItemFormContainer>
+      </EnglishItemContainer>
     );
   }
 
   return (
-    <EnglishItemFormContainer title="Meaning">
-      <div className="flex flex-col gap-10">
+    <EnglishItemContainer title="Meaning">
+      <div className="flex flex-col gap-6">
         <div className="flex items-center justify-start gap-5">
           <div className="text-white bg-gray-600 w-6 h-6 rounded-sm flex flex-col items-center justify-center">
             <p>あ</p>
@@ -70,7 +68,7 @@ const MeaningForm = ({
           <p>{enExplanation}</p>
         </div>
       </div>
-    </EnglishItemFormContainer>
+    </EnglishItemContainer>
   );
 };
 
