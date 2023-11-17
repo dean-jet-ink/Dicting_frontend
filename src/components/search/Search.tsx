@@ -28,4 +28,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>(
   }
 );
 
+Search.displayName = "Search";
+
 export default Search;

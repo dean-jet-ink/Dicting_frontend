@@ -18,6 +18,7 @@ const AutoComplete = ({
         {autoComplete.map((content, index) => {
           return (
             <AutoCompleteItem
+              key={content}
               content={content}
               selected={selectedRow === index}
               onClickItem={onClickItem}

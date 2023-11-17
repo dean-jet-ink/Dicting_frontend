@@ -77,7 +77,7 @@ const History = ({ englishItemId }: HisotryProps) => {
       english_item_id: englishItemId,
     });
 
-    setOpenDelete(false)
+    setOpenDelete(false);
   };
 
   return (
@@ -95,7 +95,10 @@ const History = ({ englishItemId }: HisotryProps) => {
               <>
                 {times?.output_times.map((time) => {
                   return (
-                    <li className="flex items-center justify-between">
+                    <li
+                      key={dayjs(time).format("YYYY/MM/DD (hh:mm:ss)")}
+                      className="flex items-center justify-between"
+                    >
                       <div
                         className="text-lg text-accent hover:text-indigo-700 cursor-pointer"
                         onClick={() => openOutput(time)}

@@ -1,7 +1,8 @@
 import { Meta, StoryFn } from "@storybook/react";
 import Slider, { SliderProps } from "./Slider";
-import apple from "../../../public/apple.jpg";
+import top from "../../../public/login.svg";
 import Image from "next/image";
+import { ReactNode } from "react";
 
 const meta: Meta = {
   title: "Components/Slider",
@@ -9,26 +10,20 @@ const meta: Meta = {
 };
 
 const Template: StoryFn<SliderProps> = (props) => {
+  let contents: ReactNode[] = [];
+
+  for (let i = 0; i < 5; i++) {
+    contents.push(<Image key={i} src={top} width={420} alt="" />);
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center">
-      <Slider {...props} />
+      <Slider contents={contents} />
     </div>
   );
 };
 
 const Default = Template.bind({});
-Default.args = {
-  contents: [
-    <Image src={apple} width={420} alt="" />,
-    <Image src={apple} width={420} alt="" />,
-    <Image src={apple} width={420} alt="" />,
-    <Image src={apple} width={420} alt="" />,
-    <Image src={apple} width={420} alt="" />,
-    <Image src={apple} width={420} alt="" />,
-    <Image src={apple} width={420} alt="" />,
-    <Image src={apple} width={420} alt="" />,
-  ],
-};
 
 export default meta;
 export { Default };
