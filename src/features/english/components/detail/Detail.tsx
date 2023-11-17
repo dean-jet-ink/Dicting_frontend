@@ -36,11 +36,11 @@ const Detail = ({
     setIsEdit(toggle);
   }, []);
 
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isCreate) {
       setIsEdit(true);
     }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
   const { content, translations, en_explanation, proficiency, exp, imgs } =

@@ -37,14 +37,14 @@ const TranslationForm = ({
 
   const { submit, isLoading } = useProposalTranslation({ onSuccess });
 
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   const onClickSubmit = useCallback(() => {
     submit({ content });
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   const onClickRemove = useCallback(() => {
     remove(index);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
   return (

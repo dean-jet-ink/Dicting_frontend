@@ -10,7 +10,7 @@ const Template: StoryFn<LoadingProps> = (props) => <Loading {...props} />;
 
 const Small = Template.bind({});
 Small.args = {
-  variant: "small",
+  variant: "sm",
 };
 
 const Mid = Template.bind({});

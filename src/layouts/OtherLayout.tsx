@@ -13,7 +13,6 @@ type BaseLayoutProps = {
 const OtherLayout = ({ children }: BaseLayoutProps) => {
   const router = useRouter();
 
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useLayoutEffect(() => {
     const getToken = async () => {
       const result = await axios.get<GetTokenParam>("/api/token");
@@ -24,6 +23,7 @@ const OtherLayout = ({ children }: BaseLayoutProps) => {
     };
 
     getToken();
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
   return (

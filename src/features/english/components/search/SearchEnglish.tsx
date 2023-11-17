@@ -46,7 +46,6 @@ const SearchEnglish = ({ isOpenMobile, open, close }: SearchEnglishProps) => {
     searchRef.current?.blur();
   };
 
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!isLoading) {
       setFilteredEnglishItems({
@@ -54,6 +53,7 @@ const SearchEnglish = ({ isOpenMobile, open, close }: SearchEnglishProps) => {
         proficiency,
       });
     }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [englishItems]);
 
   const { register, handleSubmit, formState, setValue } =

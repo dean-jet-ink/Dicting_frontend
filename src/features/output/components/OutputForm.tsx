@@ -36,9 +36,9 @@ const OutputForm = ({ englishItemId, content }: OutputFormProps) => {
 
   const [isAnswered, setIsAnswered] = useState(false);
 
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(() => {
     append({ index: 0, question: "", answer: "" });
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
   const appendField = () => {

@@ -38,7 +38,6 @@ const ImageForm = ({
     setSelectedImg(img);
   };
 
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   const appendImg = useCallback(
     (url: string) => {
       if (fields.length === 0) {
@@ -47,6 +46,7 @@ const ImageForm = ({
         append({ url, is_thumbnail: false });
       }
     },
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
     [fields]
   );
 
