@@ -36,6 +36,7 @@ const Detail = ({
     setIsEdit(toggle);
   }, []);
 
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isCreate) {
       setIsEdit(true);

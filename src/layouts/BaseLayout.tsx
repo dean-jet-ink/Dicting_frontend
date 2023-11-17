@@ -15,10 +15,6 @@ type BaseLayoutProps = {
   children: ReactNode;
 };
 
-type GetTokenParam = {
-  token: string | undefined;
-};
-
 const BaseLayout = ({ children }: BaseLayoutProps) => {
   const router = useRouter();
 
@@ -32,7 +28,7 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
     };
 
     getToken();
-  }, []);
+  }, [router]);
 
   const [isOpen, setOpen] = useState(false);
 

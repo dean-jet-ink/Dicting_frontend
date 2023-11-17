@@ -38,6 +38,7 @@ const ImageForm = ({
     setSelectedImg(img);
   };
 
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   const appendImg = useCallback(
     (url: string) => {
       if (fields.length === 0) {
@@ -87,6 +88,7 @@ const ImageForm = ({
 
         {isOpen && (
           <Modal isOpen={isOpen} close={closeModal} bg="bg-transparent">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={selectedImg} alt="" className="mt-5 m-auto" />
           </Modal>
         )}
@@ -113,6 +115,7 @@ const ImageForm = ({
       )}
 
       <Modal isOpen={isOpen} close={closeModal} bg="bg-transparent">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={selectedImg} alt="" className="mt-5" />
       </Modal>
     </EnglishItemContainer>

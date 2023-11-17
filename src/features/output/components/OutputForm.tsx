@@ -36,6 +36,7 @@ const OutputForm = ({ englishItemId, content }: OutputFormProps) => {
 
   const [isAnswered, setIsAnswered] = useState(false);
 
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(() => {
     append({ index: 0, question: "", answer: "" });
   }, []);
@@ -103,14 +104,14 @@ const OutputForm = ({ englishItemId, content }: OutputFormProps) => {
     <div className="w-full sm:w-[80vw] max-w-[1024px] py-10">
       <div className="text-center mb-16">
         <h2 className="md:text-xl">
-          以下の日本語を '{content}' を使用した英語にしてください
+          以下の日本語を 【{content}】 を使用した英語にしてください
         </h2>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="lg:px-10">
         <div className="flex flex-col items-center justify-center gap-12">
           {fields.map(({ id, answer }, index) => {
             return (
-              <div className="w-full">
+              <div key={id} className="w-full">
                 <div className="text-[42px] text-gray-400 tracking-[8px] mb-8">
                   Q{index + 1}
                 </div>

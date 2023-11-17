@@ -67,6 +67,7 @@ const UserImageForm = () => {
         {selectedImg === "" ? (
           <Img img={data.image} defaultImg={user} className={imgStyle} />
         ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
           <img src={selectedImg} alt="" className={imgStyle} />
         )}
       </div>
@@ -75,7 +76,11 @@ const UserImageForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <File {...register("image")} onChange={onChange} />
-        <Button type="submit" isLoading={isLoadingUpdate} disabled={selectedImg == ""} >
+        <Button
+          type="submit"
+          isLoading={isLoadingUpdate}
+          disabled={selectedImg == ""}
+        >
           変更
         </Button>
       </form>

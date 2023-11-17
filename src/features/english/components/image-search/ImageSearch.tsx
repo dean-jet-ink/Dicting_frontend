@@ -197,6 +197,7 @@ const ImageSearch = ({ search, setImg }: Props) => {
       {/* 画像保存確認モーダル */}
       <Modal isOpen={isOpen} close={closeConfirm} zIndex="z-[70]">
         <div className="w-full px-12 py-7">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={selectedImage}
             alt=""

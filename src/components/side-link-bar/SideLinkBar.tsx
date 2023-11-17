@@ -1,4 +1,4 @@
-import { Image, LogOut, Settings, User } from "lucide-react";
+import { Image as ImgIcon, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
 
 type SideLinkBarProps = {
@@ -18,7 +18,7 @@ const SideLinkBar = ({ isIcon = false }: SideLinkBarProps) => {
         <li>
           <Link href="/user/image" className="hover:text-accent">
             <div className={`${isIcon && "hidden"} md:block`}>Image</div>
-            <Image className={`${isIcon ? "block" : "hidden"} md:hidden`} />
+            <ImgIcon className={`${isIcon ? "block" : "hidden"} md:hidden`} />
           </Link>
         </li>
         <li>

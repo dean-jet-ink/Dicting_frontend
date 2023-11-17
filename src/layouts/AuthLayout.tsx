@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, useLayoutEffect } from "react";
 
 import loginImg from "../../public/login.svg";
 import Header from "@/components/header/Header";

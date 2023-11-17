@@ -24,6 +24,7 @@ const ExplanationForm = ({
 
   const { submit, isLoading } = useProposalExplanation({ onSuccess });
 
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   const onClickSubmit = useCallback(() => {
     submit({ content });
   }, []);

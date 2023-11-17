@@ -10,13 +10,10 @@ type BaseLayoutProps = {
   children: ReactNode;
 };
 
-type GetTokenParam = {
-  token: string | undefined;
-};
-
 const OtherLayout = ({ children }: BaseLayoutProps) => {
   const router = useRouter();
 
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useLayoutEffect(() => {
     const getToken = async () => {
       const result = await axios.get<GetTokenParam>("/api/token");

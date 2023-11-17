@@ -24,6 +24,7 @@ const Popup = ({ content, isVisible, bg = "bg-subAccent" }: PopupProps) => {
     setOpen(false);
   };
 
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(() => {
     if (isVisible) {
       onMouseEnterHandler();
