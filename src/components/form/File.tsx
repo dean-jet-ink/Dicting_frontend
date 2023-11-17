@@ -40,4 +40,6 @@ const File = forwardRef<HTMLInputElement, FileProps>((props, ref) => {
   );
 });
 
+File.displayName = "File";
+
 export default File;

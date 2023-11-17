@@ -85,6 +85,7 @@ const SortProficiency = () => {
           {proficiencies.map((proficiency) => {
             return (
               <li
+                key={proficiency}
                 className={`py-2 px-4 ${
                   proficiency === selectedProficiency ? "bg-gray-300" : ""
                 }`}

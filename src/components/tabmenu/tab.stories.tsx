@@ -22,12 +22,6 @@ Default.args = {
               voluptatum! Voluptates aliquam pariatur consectetur, reiciendis
               doloribus iusto aliquid sit ipsum placeat rerum.
             </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consectetur reprehenderit, ad nam impedit sed sint quod pariatur
-              voluptatum! Voluptates aliquam pariatur consectetur, reiciendis
-              doloribus iusto aliquid sit ipsum placeat rerum.
-            </p>
           </div>
         </div>
       ),
@@ -36,7 +30,20 @@ Default.args = {
       overview: "Tab2",
       content: (
         <div className="p-4">
-          <h2 className="text-xl">This is Tab2's content</h2>
+          <div className="flex flex-col gap-8">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consectetur reprehenderit, ad nam impedit sed sint quod pariatur
+              voluptatum! Voluptates aliquam pariatur consectetur, reiciendis
+              doloribus iusto aliquid sit ipsum placeat rerum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consectetur reprehenderit, ad nam impedit sed sint quod pariatur
+              voluptatum! Voluptates aliquam pariatur consectetur, reiciendis
+              doloribus iusto aliquid sit ipsum placeat rerum.
+            </p>
+          </div>
         </div>
       ),
     },

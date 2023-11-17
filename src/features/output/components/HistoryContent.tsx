@@ -12,7 +12,7 @@ const HistoryContent = ({ outputs }: HistoryContentProps) => {
       <div className="flex flex-col items-center justify-center gap-12">
         {outputs.map(({ id, question, answer, advice }, index) => {
           return (
-            <div className="w-full">
+            <div key={id} className="w-full">
               <div className="text-[42px] text-gray-400 tracking-[8px] mb-8">
                 Q{index + 1}
               </div>
