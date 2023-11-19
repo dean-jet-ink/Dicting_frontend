@@ -1,7 +1,8 @@
+import { ReactElement } from "react";
+
 import Border from "@/components/border/Border";
 import UserImageForm from "@/features/user/components/UserImageForm";
 import OtherLayout from "@/layouts/OtherLayout";
-import { ReactElement } from "react";
 
 const ImagePage = () => {
   return (
