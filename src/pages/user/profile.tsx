@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 import OtherLayout from "../../layouts/OtherLayout";
-import Border from "@/components/border/Border";
 import UserForm from "@/features/user/components/UserForm";
 
 const ProfilePage = () => {
@@ -8,7 +7,7 @@ const ProfilePage = () => {
     <div className="w-full">
       <div className="w-full sm:w-80 text-center m-auto">
         <h1>Profile</h1>
-        <Border />
+        <div className="w-full border-b border-gray-400 mt-2 mb-8"></div>
       </div>
       <div className="mt-24">
         <UserForm />
