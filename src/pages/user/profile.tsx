@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import OtherLayout from "../../layouts/OtherLayout";
-import Border from "@/components/border/border";
+import Border from "@/components/border/Border";
 import UserForm from "@/features/user/components/UserForm";
 
 const ProfilePage = () => {

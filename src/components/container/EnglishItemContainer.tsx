@@ -14,7 +14,7 @@ const EnglishItemContainer = ({
       <div className="pb-2 border-b border-gray-300 mb-8">
         <h3 className="text-3xl">{title}</h3>
       </div>
-      <div className="">{children}</div>
+      <div>{children}</div>
     </div>
   );
 };

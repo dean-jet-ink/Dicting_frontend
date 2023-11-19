@@ -1,4 +1,4 @@
-import { Pen, Volume2 } from "lucide-react";
+import { Pen } from "lucide-react";
 
 import { EnglishItem, EnglishItemForm } from "../../types";
 import Button from "@/components/button/Button";

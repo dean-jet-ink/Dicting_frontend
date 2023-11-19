@@ -3,7 +3,6 @@ import Input from "@/components/form/Input";
 import { useProposal } from "../../api/proposal";
 import { useForm } from "react-hook-form";
 import { EnglishContent, Proposal } from "../../types";
-import { ENV } from "@/config/constants";
 import { useState } from "react";
 import CreateEnglishForm from "./CreateEnglishForm";
 

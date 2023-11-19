@@ -1,7 +1,7 @@
 import Loading from "@/components/loading/Loading";
 import Popup from "@/components/popup/Popup";
 import { BrainCircuit } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type AIIconProps = {
   submit: () => void;

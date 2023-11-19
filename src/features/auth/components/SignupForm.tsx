@@ -15,7 +15,7 @@ const SignupForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className=" flex flex-col gap-3 items-center">
+      <div className="flex flex-col gap-3 items-center">
         <Input
           placeholder="メールアドレス"
           type="email"

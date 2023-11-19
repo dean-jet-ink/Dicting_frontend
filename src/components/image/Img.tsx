@@ -5,7 +5,7 @@ import noImg from "../../../public/noImage.png";
 export type ImgProps = {
   img: string;
   defaultImg?: StaticImageData;
-} & Pick<ComponentProps<"img">, "className">;
+} & Partial<Pick<ComponentProps<"img">, "className">>;
 
 const Img = ({ img, defaultImg, className }: ImgProps) => {
   return img === "" ? (

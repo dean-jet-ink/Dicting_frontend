@@ -48,7 +48,7 @@ const TranslationForm = ({
   }, []);
 
   return (
-    <div className="">
+    <div>
       <Input
         {...register(`translations.${index}.translation`, {
           required: "この項目は必須です",
