@@ -104,7 +104,7 @@ const OutputForm = ({ englishItemId, content }: OutputFormProps) => {
     <div className="w-full sm:w-[80vw] max-w-[1024px] py-10">
       <div className="text-center mb-16">
         <h2 className="md:text-xl">
-          以下の日本語を 【{content}】 を使用した英語にしてください
+          以下の日本語を<span className="text-accent">{content}</span>を使用した英語にしてください
         </h2>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="lg:px-10">

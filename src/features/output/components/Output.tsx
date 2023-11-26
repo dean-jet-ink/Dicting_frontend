@@ -5,6 +5,7 @@ import { EnglishItem } from "../../english/types";
 import Modal from "@/components/modal/Modal";
 import OutputForm from "./OutputForm";
 import History from "./History";
+import EnglishItemContainer from "@/components/container/EnglishItemContainer";
 
 const Output = () => {
   const englishItem: EnglishItem | undefined = queryClient.getQueryData([
@@ -47,31 +48,33 @@ const Output = () => {
       <div>
         <h2 className="text-lg md:text-2xl mb-20 w-fit m-auto">{content}</h2>
       </div>
-      <div
-        className="relative flex items-end justify-center cursor-pointer w-fit m-auto border border-gray-500 py-3 px-6 hover:border-accent"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onTouchStart={onMouseEnter}
-        onTouchEnd={onMouseLeave}
-        onClick={openOutput}
-      >
-        <div className="text-3xl transition-all duration-300" ref={outputRef}>
-          Output
-        </div>
+      <EnglishItemContainer title="Output">
         <div
-          className="absolute -right-6 transition-all duration-200"
-          ref={arrowRef}
+          className="relative flex items-end justify-center cursor-pointer w-fit m-auto border border-gray-500 py-3 px-6 hover:border-accent mt-16"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onTouchStart={onMouseEnter}
+          onTouchEnd={onMouseLeave}
+          onClick={openOutput}
         >
+          <div className="text-3xl transition-all duration-300" ref={outputRef}>
+            Output
+          </div>
           <div
-            className="w-10 h-[1px] bg-gray-500 transition-all duration-300"
-            ref={Line1Ref}
-          ></div>
-          <div
-            className="w-2 h-[1px] bg-gray-500 absolute top-0 right-0 origin-bottom-right rotate-45 transition-all duration-300"
-            ref={Line2Ref}
-          ></div>
+            className="absolute -right-6 transition-all duration-200"
+            ref={arrowRef}
+          >
+            <div
+              className="w-10 h-[1px] bg-gray-500 transition-all duration-300"
+              ref={Line1Ref}
+            ></div>
+            <div
+              className="w-2 h-[1px] bg-gray-500 absolute top-0 right-0 origin-bottom-right rotate-45 transition-all duration-300"
+              ref={Line2Ref}
+            ></div>
+          </div>
         </div>
-      </div>
+      </EnglishItemContainer>
 
       <div className="mt-20">
         <History englishItemId={englishItem!.id} />

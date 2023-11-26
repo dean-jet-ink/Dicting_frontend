@@ -4,6 +4,7 @@ import { SEARCH_ENGINE_ID } from "@/config/constants";
 import Search from "@/components/search/Search";
 import Modal from "@/components/modal/Modal";
 import Button from "@/components/button/Button";
+import { isMobile } from "@/lib/mobile";
 
 type Props = {
   search: string;
@@ -175,22 +176,55 @@ const ImageSearch = ({ search, setImg }: Props) => {
   };
 
   const setPagenationEvent = (index: number) => {
-    const pagenations = document.querySelectorAll(".gsc-cursor-page");
-
-    if (pagenations.length === 0) {
-      setTimeout(() => setPagenationEvent(index), 500);
-      return;
-    }
-
-    pagenations.forEach((pagenation, i) => {
-      if (index !== i) {
-        pagenation.addEventListener("click", () => {
-          initializeNode();
-
-          setCustomEvents(i);
-        });
+    if(!isMobile()) {
+      const pagenations = document.querySelectorAll(".gsc-cursor-page");
+  
+      
+      if (pagenations.length === 0) {
+        setTimeout(() => setPagenationEvent(index), 500);
+        return;
       }
-    });
+      
+      pagenations.forEach((pagenation, i) => {
+        if (index !== i) {
+          pagenation.addEventListener("click", () => {
+            initializeNode();
+            
+            setCustomEvents(i);
+          });
+        }
+      });
+    } else {
+      // モバイル用
+      const cursorPreviouses = document.querySelectorAll(
+        ".gsc-cursor-container-previous"
+      );
+  
+      const cursorNexts = document.querySelectorAll(".gsc-cursor-container-next");
+
+      if (cursorPreviouses.length === 0) {
+        setTimeout(() => setPagenationEvent(index), 500);
+        return;
+      }
+  
+      cursorPreviouses.forEach((previous) => {
+        previous.addEventListener("click", () => {
+          initializeNode();
+  
+          // モバイルでは指定不要
+          setCustomEvents(-1);
+        });
+      });
+  
+      cursorNexts.forEach((next) => {
+        next.addEventListener("click", () => {
+          initializeNode();
+  
+          // モバイルでは指定不要
+          setCustomEvents(-1);
+        });
+      });
+    }
   };
 
   const initializeNode = () => {
@@ -203,11 +237,19 @@ const ImageSearch = ({ search, setImg }: Props) => {
       popup.remove();
     });
 
-    const pagenations = document.querySelectorAll(".gsc-cursor-page");
-
-    pagenations.forEach((page) => {
-      page.remove();
-    });
+    if(isMobile()) {
+      const cursors = document.querySelectorAll(".gsc-cursor");
+  
+      cursors.forEach((cursor) => {
+        cursor.remove();
+      });
+    } else {
+      const pagenations = document.querySelectorAll(".gsc-cursor-page");
+  
+      pagenations.forEach((page) => {
+        page.remove();
+      });
+    }
   };
 
   return (
