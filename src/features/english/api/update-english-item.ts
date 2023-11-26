@@ -1,5 +1,5 @@
 import apiClient from "@/lib/api_client";
-import { CreateEnglishItem } from "../types";
+import { EnglishItemForm } from "../types";
 import { useMutation } from "@tanstack/react-query";
 import queryClient from "@/lib/react_query";
 
@@ -8,7 +8,7 @@ type UseUpdateEnglishItemOpetions = {
 };
 
 const useUpdateEnglishItem = ({ onSuccess }: UseUpdateEnglishItemOpetions) => {
-  const updateEnglishItem = async (englishItem: CreateEnglishItem) => {
+  const updateEnglishItem = async (englishItem: EnglishItemForm) => {
     const res = await apiClient.put("/english", englishItem);
     return res.data;
   };

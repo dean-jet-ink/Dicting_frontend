@@ -89,7 +89,7 @@ const ImageSearch = ({ search, setImg }: Props) => {
     setSearchedWord(e.target.value);
   };
 
-  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDownOpenSearchModal = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
 
     const value = searchedWord.trim();
@@ -100,10 +100,22 @@ const ImageSearch = ({ search, setImg }: Props) => {
 
     openImgMask();
     gsearch.execute(value);
-    setCustomEvents();
+    initializeEvents();
   };
 
-  const setCustomEvents = () => {
+  const onClickOpenSearchModal = () => {
+    const value = searchedWord.trim();
+
+    if (value === "") return;
+
+    const gsearch = window.google.search.cse.element.getElement("gsearch");
+
+    openImgMask();
+    gsearch.execute(value);
+    initializeEvents();
+  };
+
+  const initializeEvents = () => {
     //画像検索モーダルのz-index調整
     const modal: HTMLDivElement = document.querySelector(
       ".gsc-results-wrapper-overlay"
@@ -117,20 +129,24 @@ const ImageSearch = ({ search, setImg }: Props) => {
     // タブメニューの2番目を選択
     tabs[1].click();
 
+    // 通常検索タブと画損検索タブ、各10ページ
+    // 画像検索のpagenationインデックスは、通常検索の後なので10から開始
+    setCustomEvents(10);
+  };
+
+  const setCustomEvents = (index: number) => {
     // 表示された画像一覧での各画像に、画像選択、確認モーダルオープンのイベント追加
     setSelectedImgEvent();
 
     // ページネーションボタンのクリックイベントに上記の画像保存イベントを仕込む
-    setPagenationEvent();
+    setPagenationEvent(index);
   };
 
   const setSelectedImgEvent = () => {
-    // 標準のポップアップ表示要素の無効化
     const popups: NodeListOf<HTMLDivElement> = document.querySelectorAll(
       ".gs-result.gs-imageResult.gs-imageResult-popup"
     );
 
-    // 一番外側の要素にポインターとイベントを付与
     const popupContainers: NodeListOf<HTMLDivElement> =
       document.querySelectorAll(
         ".gsc-imageResult.gsc-imageResult-popup.gsc-result"
@@ -141,10 +157,12 @@ const ImageSearch = ({ search, setImg }: Props) => {
       return;
     }
 
+    // 標準のポップアップ表示要素の無効化
     popups.forEach((popup) => {
       popup.style["pointerEvents"] = "none";
     });
 
+    // 一番外側の要素にポインターとイベントを付与
     popupContainers.forEach((container) => {
       container.style["cursor"] = "pointer";
 
@@ -156,18 +174,39 @@ const ImageSearch = ({ search, setImg }: Props) => {
     });
   };
 
-  const setPagenationEvent = () => {
+  const setPagenationEvent = (index: number) => {
     const pagenations = document.querySelectorAll(".gsc-cursor-page");
 
     if (pagenations.length === 0) {
-      setTimeout(setPagenationEvent, 500);
+      setTimeout(() => setPagenationEvent(index), 500);
       return;
     }
 
-    pagenations.forEach((pagenation) => {
-      pagenation.addEventListener("click", () => {
-        setTimeout(setSelectedImgEvent, 1000);
-      });
+    pagenations.forEach((pagenation, i) => {
+      if (index !== i) {
+        pagenation.addEventListener("click", () => {
+          initializeNode();
+
+          setCustomEvents(i);
+        });
+      }
+    });
+  };
+
+  const initializeNode = () => {
+    const popupContainers: NodeListOf<HTMLDivElement> =
+      document.querySelectorAll(
+        ".gsc-imageResult.gsc-imageResult-popup.gsc-result"
+      );
+
+    popupContainers.forEach((popup) => {
+      popup.remove();
+    });
+
+    const pagenations = document.querySelectorAll(".gsc-cursor-page");
+
+    pagenations.forEach((page) => {
+      page.remove();
     });
   };
 
@@ -176,10 +215,13 @@ const ImageSearch = ({ search, setImg }: Props) => {
       <h3 className="text-sm mb-2">画像検索</h3>
       <Search
         id="search"
-        onKeyDown={onKeyDown}
+        onKeyDown={onKeyDownOpenSearchModal}
         value={searchedWord}
         onChange={onChange}
       />
+      <div className="w-fit m-auto mt-6">
+        <Button onClick={onClickOpenSearchModal}>検索</Button>
+      </div>
       <div id="googlesearch"></div>
 
       {/* 画像検索モーダルマスク */}

@@ -28,7 +28,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
             <Title size="lg" />
           </div>
           <p className="mt-6 md:mt-12 text-xs md:text-base">
-            あなただけの英語辞書
+            あなただけの英語辞書を。
           </p>
         </div>
         <div className="flex-grow">{children}</div>

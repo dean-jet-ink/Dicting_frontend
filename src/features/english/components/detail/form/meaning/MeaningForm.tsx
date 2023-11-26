@@ -4,7 +4,7 @@ import {
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import { EnglishItemForm } from "@/features/english/types";
+import { EnglishItemFormForHook } from "@/features/english/types";
 import EnglishItemContainer from "../../../../../../components/container/EnglishItemContainer";
 import TranslationFormList from "./TranslationFormList";
 import ExplanationForm from "./ExplanationForm";
@@ -14,10 +14,14 @@ type MeaningFormProps = {
   content: string;
   translations: string[];
   enExplanation: string;
-  translationFields: UseFieldArrayReturn<EnglishItemForm, "translations", "id">;
-  register: UseFormRegister<EnglishItemForm>;
-  formState: FormState<EnglishItemForm>;
-  setValue: UseFormSetValue<EnglishItemForm>;
+  translationFields: UseFieldArrayReturn<
+    EnglishItemFormForHook,
+    "translations",
+    "id"
+  >;
+  register: UseFormRegister<EnglishItemFormForHook>;
+  formState: FormState<EnglishItemFormForHook>;
+  setValue: UseFormSetValue<EnglishItemFormForHook>;
 };
 
 const MeaningForm = ({

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { CreateEnglishItem } from "../types/index";
+import { EnglishItemForm } from "../types/index";
 import apiClient from "@/lib/api_client";
 import queryClient from "@/lib/react_query";
 
@@ -9,7 +9,7 @@ type useCreateEnglishItemOptions = {
 };
 
 const useCreateEnglishItem = ({ onSuccess }: useCreateEnglishItemOptions) => {
-  const createEnglishItem = async (englishItem: CreateEnglishItem) => {
+  const createEnglishItem = async (englishItem: EnglishItemForm) => {
     const res = await apiClient.post("/english", englishItem);
     return res.data;
   };

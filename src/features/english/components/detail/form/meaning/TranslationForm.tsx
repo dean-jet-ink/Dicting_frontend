@@ -5,7 +5,7 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 
-import { EnglishItemForm } from "@/features/english/types";
+import { EnglishItemFormForHook } from "@/features/english/types";
 import Input from "@/components/form/Input";
 import { useProposalTranslation } from "@/features/english/api/proposal-translation";
 import AIIcon from "../../../ai/AIIcon";
@@ -16,10 +16,10 @@ type TranslationFormProps = {
   content: string;
   index: number;
   translation: string;
-  register: UseFormRegister<EnglishItemForm>;
-  formState: FormState<EnglishItemForm>;
+  register: UseFormRegister<EnglishItemFormForHook>;
+  formState: FormState<EnglishItemFormForHook>;
   remove: UseFieldArrayRemove;
-  setValue: UseFormSetValue<EnglishItemForm>;
+  setValue: UseFormSetValue<EnglishItemFormForHook>;
 };
 
 const TranslationForm = ({

@@ -6,7 +6,7 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import EnglishItemContainer from "../../../../../../components/container/EnglishItemContainer";
-import { EnglishItemForm } from "@/features/english/types";
+import { EnglishItemFormForHook } from "@/features/english/types";
 import Accordion from "@/components/accordion/Accordion";
 import { useState } from "react";
 import { Plus } from "lucide-react";
@@ -14,11 +14,11 @@ import ExampleForm from "./ExampleForm";
 
 type ExampleFormListProps = {
   isEdit: boolean;
-  getValues: UseFormGetValues<EnglishItemForm>;
-  exampleFields: UseFieldArrayReturn<EnglishItemForm, "examples", "id">;
-  register: UseFormRegister<EnglishItemForm>;
-  formState: FormState<EnglishItemForm>;
-  setValue: UseFormSetValue<EnglishItemForm>;
+  getValues: UseFormGetValues<EnglishItemFormForHook>;
+  exampleFields: UseFieldArrayReturn<EnglishItemFormForHook, "examples", "id">;
+  register: UseFormRegister<EnglishItemFormForHook>;
+  formState: FormState<EnglishItemFormForHook>;
+  setValue: UseFormSetValue<EnglishItemFormForHook>;
 };
 
 const ExampleFormList = ({

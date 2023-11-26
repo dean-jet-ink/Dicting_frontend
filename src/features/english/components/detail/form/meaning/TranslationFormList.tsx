@@ -6,14 +6,18 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import TranslationForm from "./TranslationForm";
-import { EnglishItemForm } from "@/features/english/types";
+import { EnglishItemFormForHook } from "@/features/english/types";
 
 type TranslationFormListProps = {
   content: string;
-  translationFields: UseFieldArrayReturn<EnglishItemForm, "translations", "id">;
-  register: UseFormRegister<EnglishItemForm>;
-  formState: FormState<EnglishItemForm>;
-  setValue: UseFormSetValue<EnglishItemForm>;
+  translationFields: UseFieldArrayReturn<
+    EnglishItemFormForHook,
+    "translations",
+    "id"
+  >;
+  register: UseFormRegister<EnglishItemFormForHook>;
+  formState: FormState<EnglishItemFormForHook>;
+  setValue: UseFormSetValue<EnglishItemFormForHook>;
 };
 
 const TranslationFormList = ({

@@ -1,5 +1,5 @@
 import Input from "@/components/form/Input";
-import { EnglishItemForm } from "@/features/english/types";
+import { EnglishItemFormForHook } from "@/features/english/types";
 import { FormState, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import AIIcon from "../../../ai/AIIcon";
 import { useProposalExplanation } from "@/features/english/api/proposal-explanation";
@@ -7,9 +7,9 @@ import { useCallback } from "react";
 
 type ExplanationProps = {
   content: string;
-  register: UseFormRegister<EnglishItemForm>;
-  formState: FormState<EnglishItemForm>;
-  setValue: UseFormSetValue<EnglishItemForm>;
+  register: UseFormRegister<EnglishItemFormForHook>;
+  formState: FormState<EnglishItemFormForHook>;
+  setValue: UseFormSetValue<EnglishItemFormForHook>;
 };
 
 const ExplanationForm = ({

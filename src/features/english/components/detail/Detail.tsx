@@ -1,6 +1,6 @@
 import { Pen } from "lucide-react";
 
-import { EnglishItem, EnglishItemForm } from "../../types";
+import { EnglishItem, EnglishItemFormForHook } from "../../types";
 import Button from "@/components/button/Button";
 import { useFieldArray, useForm } from "react-hook-form";
 import MeaningForm from "./form/meaning/MeaningForm";
@@ -15,7 +15,7 @@ import useUpdateEnglishItem from "../../api/update-english-item";
 import EnglishVideo from "../english-video/EnglishVideo";
 import Exp from "../exp/Exp";
 import EnglishItemContainer from "../../../../components/container/EnglishItemContainer";
-import answerResolver from "../../validation/english-item-schema";
+import englishItemResolver from "../../validation/english-item-schema";
 
 type DetailProps = {
   englishItem: EnglishItem;
@@ -47,7 +47,7 @@ const Detail = ({
     englishItem;
 
   const { register, handleSubmit, control, formState, getValues, setValue } =
-    useForm<EnglishItemForm>({
+    useForm<EnglishItemFormForHook>({
       mode: "all",
       criteriaMode: "all",
       defaultValues: {
@@ -55,7 +55,7 @@ const Detail = ({
         // useFieldArrayで使用できる型に変換
         translations: translations.map((translation) => ({ translation })),
       },
-      resolver: answerResolver,
+      resolver: englishItemResolver,
     });
 
   const translationsFields = useFieldArray({
@@ -83,14 +83,14 @@ const Detail = ({
       duration: 5000,
     });
 
-    close();
+    closeCreateModal?.();
   };
 
   const { submit: create, isLoading: isLoadingCreate } = useCreateEnglishItem({
     onSuccess: onSuccessCreate,
   });
 
-  const onSubmitCreate = (payload: EnglishItemForm) => {
+  const onSubmitCreate = (payload: EnglishItemFormForHook) => {
     const translations = payload.translations;
 
     const englishItemForm = {
@@ -104,7 +104,6 @@ const Detail = ({
 
   const onClickSubmitCreate = () => {
     handleSubmit(onSubmitCreate)();
-    closeCreateModal?.();
   };
 
   const onSuccessUpdate = () => {
@@ -123,7 +122,7 @@ const Detail = ({
     onSuccess: onSuccessUpdate,
   });
 
-  const onSubmitUpdate = (payload: EnglishItemForm) => {
+  const onSubmitUpdate = (payload: EnglishItemFormForHook) => {
     const translations = payload.translations;
     const englishItemForm = {
       ...payload,

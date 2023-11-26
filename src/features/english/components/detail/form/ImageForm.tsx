@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { UseFieldArrayReturn } from "react-hook-form";
 
-import { EnglishItemForm, Img } from "@/features/english/types";
+import { EnglishItemFormForHook, Img } from "@/features/english/types";
 import ImageSearch from "../../image-search/ImageSearch";
 import EnglishImg from "../../english-img/EnglishImg";
 import EnglishItemContainer from "../../../../../components/container/EnglishItemContainer";
@@ -13,7 +13,7 @@ type ImageFormProps = {
   isEdit: boolean;
   content: string;
   imgs: Img[];
-  imgFields: UseFieldArrayReturn<EnglishItemForm, "imgs", "id">;
+  imgFields: UseFieldArrayReturn<EnglishItemFormForHook, "imgs", "id">;
 };
 
 const ImageForm = ({

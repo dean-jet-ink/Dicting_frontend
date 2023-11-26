@@ -4,7 +4,7 @@ import {
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
-import { EnglishItemForm, Example } from "@/features/english/types";
+import { EnglishItemFormForHook, Example } from "@/features/english/types";
 import Input from "@/components/form/Input";
 import AIIcon from "../../../ai/AIIcon";
 import useProposalExample from "@/features/english/api/proposal-example";
@@ -15,10 +15,10 @@ type ExampleFormProps = {
   index: number;
   example: string;
   translation: string;
-  register: UseFormRegister<EnglishItemForm>;
-  formState: FormState<EnglishItemForm>;
+  register: UseFormRegister<EnglishItemFormForHook>;
+  formState: FormState<EnglishItemFormForHook>;
   remove: UseFieldArrayRemove;
-  setValue: UseFormSetValue<EnglishItemForm>;
+  setValue: UseFormSetValue<EnglishItemFormForHook>;
 };
 
 const ExampleForm = ({

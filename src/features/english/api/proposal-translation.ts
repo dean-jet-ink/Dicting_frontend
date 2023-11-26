@@ -1,5 +1,5 @@
 import apiClient from "@/lib/api_client";
-import { EnglishContent, EnglishItemForm, Example } from "../types";
+import { EnglishContent, EnglishItemFormForHook, Example } from "../types";
 import { useMutation } from "@tanstack/react-query";
 import queryClient from "@/lib/react_query";
 

@@ -48,11 +48,18 @@ export type Translation = {
   translation: string;
 };
 
-export type EnglishItemForm = Omit<EnglishItem, "translations"> & {
+export type EnglishItemFormForHook = {
+  id?: string;
+  content: string;
   translations: Translation[];
+  en_explanation: string;
+  examples: Example[];
+  imgs?: Img[];
 };
 
-export type CreateEnglishItem = Omit<EnglishItem, "id" | "proficiency" | "exp">;
+export type EnglishItemForm = Omit<EnglishItemFormForHook, "translations"> & {
+  translations: string[];
+};
 
 export type DeleteEnglishItem = {
   id: string;
