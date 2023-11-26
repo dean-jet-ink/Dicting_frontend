@@ -1,4 +1,4 @@
-import { BE_URL, ENDPOINT } from "@/config/constants";
+import { BE_URL } from "@/config/constants";
 import LoginForm from "@/features/auth/components/LoginForm";
 import OAuth from "@/features/auth/components/OAuth";
 import MyLink from "@/components/link/MyLink";
@@ -7,7 +7,6 @@ import { ReactElement } from "react";
 
 const LoginPage = () => {
   console.log(BE_URL);
-  console.log(ENDPOINT);
 
   return (
     <div className="flex flex-col items-center xl:gap-10 gap-8">
