@@ -22,7 +22,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
           <Image
             src={loginImg}
             alt=""
-            className="w-[60%] m-auto hidden md:block"
+            className="w-[80%] m-auto hidden md:block"
           />
           <div className="md:hidden w-fit m-auto">
             <Title size="lg" />
