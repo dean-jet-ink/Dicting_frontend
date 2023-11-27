@@ -104,18 +104,6 @@ const ImageSearch = ({ search, setImg }: Props) => {
     initializeEvents();
   };
 
-  const onClickOpenSearchModal = () => {
-    const value = searchedWord.trim();
-
-    if (value === "") return;
-
-    const gsearch = window.google.search.cse.element.getElement("gsearch");
-
-    openImgMask();
-    gsearch.execute(value);
-    initializeEvents();
-  };
-
   const initializeEvents = () => {
     //画像検索モーダルのz-index調整
     const modal: HTMLDivElement = document.querySelector(
@@ -176,20 +164,19 @@ const ImageSearch = ({ search, setImg }: Props) => {
   };
 
   const setPagenationEvent = (index: number) => {
-    if(!isMobile()) {
+    if (!isMobile()) {
       const pagenations = document.querySelectorAll(".gsc-cursor-page");
-  
-      
+
       if (pagenations.length === 0) {
         setTimeout(() => setPagenationEvent(index), 500);
         return;
       }
-      
+
       pagenations.forEach((pagenation, i) => {
         if (index !== i) {
           pagenation.addEventListener("click", () => {
             initializeNode();
-            
+
             setCustomEvents(i);
           });
         }
@@ -199,27 +186,29 @@ const ImageSearch = ({ search, setImg }: Props) => {
       const cursorPreviouses = document.querySelectorAll(
         ".gsc-cursor-container-previous"
       );
-  
-      const cursorNexts = document.querySelectorAll(".gsc-cursor-container-next");
+
+      const cursorNexts = document.querySelectorAll(
+        ".gsc-cursor-container-next"
+      );
 
       if (cursorPreviouses.length === 0) {
         setTimeout(() => setPagenationEvent(index), 500);
         return;
       }
-  
+
       cursorPreviouses.forEach((previous) => {
         previous.addEventListener("click", () => {
           initializeNode();
-  
+
           // モバイルでは指定不要
           setCustomEvents(-1);
         });
       });
-  
+
       cursorNexts.forEach((next) => {
         next.addEventListener("click", () => {
           initializeNode();
-  
+
           // モバイルでは指定不要
           setCustomEvents(-1);
         });
@@ -237,15 +226,15 @@ const ImageSearch = ({ search, setImg }: Props) => {
       popup.remove();
     });
 
-    if(isMobile()) {
+    if (isMobile()) {
       const cursors = document.querySelectorAll(".gsc-cursor");
-  
+
       cursors.forEach((cursor) => {
         cursor.remove();
       });
     } else {
       const pagenations = document.querySelectorAll(".gsc-cursor-page");
-  
+
       pagenations.forEach((page) => {
         page.remove();
       });
@@ -260,10 +249,8 @@ const ImageSearch = ({ search, setImg }: Props) => {
         onKeyDown={onKeyDownOpenSearchModal}
         value={searchedWord}
         onChange={onChange}
+        enterKeyHint="enter"
       />
-      <div className="w-fit m-auto mt-6">
-        <Button onClick={onClickOpenSearchModal}>検索</Button>
-      </div>
       <div id="googlesearch"></div>
 
       {/* 画像検索モーダルマスク */}

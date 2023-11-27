@@ -35,13 +35,11 @@ const OtherLayout = ({ children }: BaseLayoutProps) => {
           </div>
         </div>
       </Header>
-      <div className="flex min-h-screen px-6">
+      <div className="flex flex-col sm:flex-row sm:items-center min-h-screen mt-24 sm:mt-0 px-6">
         <div className="md:w-80 flex justify-center items-center flex-[20%]">
           <SideLinkBar isIcon={true} />
         </div>
-        <div className="mt-32 flex justify-center w-full flex-[80%]">
-          {children}
-        </div>
+        <div className="flex justify-center w-full flex-[80%]">{children}</div>
       </div>
     </div>
   );

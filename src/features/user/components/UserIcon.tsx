@@ -16,7 +16,7 @@ const UserIcon = ({ openSideMenu }: UserIconProps) => {
 
   return (
     <div
-      className="rounded-full border border-gray-300 w-8 h-8 md:w-12 md:h-12 cursor-pointer"
+      className="rounded-full border border-gray-400 w-8 h-8 md:w-12 md:h-12 cursor-pointer"
       onClick={openSideMenu}
     >
       <Img

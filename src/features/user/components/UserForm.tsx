@@ -41,9 +41,9 @@ const UserForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-center justify-center gap-10"
+      className="flex flex-col items-center justify-start md:justify-center gap-10"
     >
-      <div className="w-2/3">
+      <div className="w-full md:w-2/3">
         <label htmlFor={nameId} className="block mb-4">
           Name
         </label>
@@ -53,7 +53,7 @@ const UserForm = () => {
           id={nameId}
         />
       </div>
-      <div className="w-2/3">
+      <div className="w-full md:w-2/3">
         <label htmlFor={emailId} className="block mb-4">
           Email
         </label>

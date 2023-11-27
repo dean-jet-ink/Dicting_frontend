@@ -9,7 +9,7 @@ type SideLinkBarProps = {
 const SideLinkBar = ({ isIcon = false }: SideLinkBarProps) => {
   return (
     <div className="p-4">
-      <ul className="flex flex-col items-center justify-center gap-10">
+      <ul className="flex sm:flex-col items-center justify-center gap-10">
         <li>
           <Link href="/user/profile" className="hover:text-accent">
             <div className={`${isIcon ? "hidden" : "block"} md:block`}>
