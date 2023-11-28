@@ -16,20 +16,6 @@ type BaseLayoutProps = {
 };
 
 const BaseLayout = ({ children }: BaseLayoutProps) => {
-  const router = useRouter();
-
-  useLayoutEffect(() => {
-    const getToken = async () => {
-      const result = await axios.get<GetTokenParam>("/api/token");
-      const token = result.data.token;
-      if (!token) {
-        router.push("/login");
-      }
-    };
-
-    getToken();
-  }, [router]);
-
   const [isOpen, setOpen] = useState(false);
 
   const toggleSideMenu = () => {
