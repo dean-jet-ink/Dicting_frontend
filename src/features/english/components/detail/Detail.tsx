@@ -12,10 +12,10 @@ import ProficiencyIcon from "../proficiency/Proficiency";
 import Switch from "@/components/switch/Switch";
 import ExampleFormList from "./form/example/ExampleFormList";
 import useUpdateEnglishItem from "../../api/update-english-item";
-import EnglishVideo from "../english-video/EnglishVideo";
 import Exp from "../exp/Exp";
 import EnglishItemContainer from "../../../../components/container/EnglishItemContainer";
 import englishItemResolver from "../../validation/english-item-schema";
+import EnglishVideoContainer from "../english-video/EnglishVideoContainer";
 
 type DetailProps = {
   englishItem: EnglishItem;
@@ -188,13 +188,15 @@ const Detail = ({
         </div>
         {!isEdit && (
           <EnglishItemContainer title="Video">
-            <EnglishVideo content={content} />
+            <div className="w-fit m-auto mt-8">
+              <EnglishVideoContainer content={content} />
+            </div>
           </EnglishItemContainer>
         )}
       </div>
 
       {isEdit && (
-        <div className="w-fit m-auto mt-12">
+        <div className="w-fit m-auto mt-16">
           {isCreate ? (
             <Button onClick={onClickSubmitCreate} isLoading={isLoadingCreate}>
               登録
